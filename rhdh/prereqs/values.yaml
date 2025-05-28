@@ -1,0 +1,9 @@
+nameOverride: "backstage-postgresql"
+
+backstage:
+  postgresql:
+    password: password
+
+argocd:
+  enabled: true
+  syncwave: "-2"

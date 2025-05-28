@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: backstage
+  namespace: openshift-gitops
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io/foreground
+  labels:
+    app.kubernetes.io/instance: backstage-bootstrap
+spec:
+  destination:
+    name: ''
+    namespace: backstage
+    server: 'https://kubernetes.default.svc'
+  project: default
+  sources:
+    - chart: redhat-developer-hub
+      helm:
+        valueFiles:
+          - $values/values.yaml
+      repoURL: 'https://charts.openshift.io'
+      targetRevision: 1.5.1
+    - ref: values
+      repoURL: 'https://github.com/panchoraposo/rhdh/developer-hub.git'
+      targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      backoff:
+        duration: 10s
+        factor: 2
+        maxDuration: 10m
+      limit: 15
+    syncOptions:
+      - CreateNamespace=true
+      - RespectIgnoreDifferences=true
+      - ApplyOutOfSyncOnly=true
