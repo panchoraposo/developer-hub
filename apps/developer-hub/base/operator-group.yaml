@@ -1,8 +1,8 @@
 apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
-  name: all-namespaces
-  namespace: openshift-operators
+  name: rhdh-operator-group
+  namespace: rhdh-operator
 spec:
   targetNamespaces:
-    - ""
+    - rhdh-operator
