@@ -2,5 +2,5 @@ apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
   name: rhdh-operator-group
-  namespace: rhdh-operator
+  namespace: backstage
 spec: {} 
