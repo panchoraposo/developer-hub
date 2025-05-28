@@ -4,7 +4,7 @@ metadata:
   name: rhdh
   namespace: backstage
 spec:
-  channel: stable
+  channel: fast
   name: rhdh
   source: redhat-operators
   sourceNamespace: openshift-marketplace
