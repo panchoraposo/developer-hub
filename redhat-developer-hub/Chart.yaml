@@ -7,7 +7,7 @@ version: 0.1.0
 dependencies:
   - name: redhat-developer-hub-prereqs
     version: 0.1.0
-    repository: file://prereqs
+    repository: file://redhat-developer-hub-prereqs
   - name: redhat-developer-hub
     alias: redhat-developer-hub
     repository: https://charts.openshift.io
