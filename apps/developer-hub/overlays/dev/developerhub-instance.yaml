@@ -1,0 +1,12 @@
+apiVersion: developerhub.redhat.com/v1alpha1
+kind: DeveloperHub
+metadata:
+  name: developer-hub
+  namespace: backstage
+spec:
+  components:
+    backstage:
+      appConfig:
+        mountPath: /etc/backstage/app-config.custom.yaml
+        configMaps:
+          - name: custom-app-config
