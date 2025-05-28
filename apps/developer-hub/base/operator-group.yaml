@@ -3,4 +3,6 @@ kind: OperatorGroup
 metadata:
   name: backstage-operatorgroup
   namespace: backstage
-spec: {}
+spec:
+  targetNamespaces:
+    - backstage
