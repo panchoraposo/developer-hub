@@ -21,7 +21,7 @@ spec:
       repoURL: 'https://charts.openshift.io'
       targetRevision: 1.5.1
     - ref: values
-      repoURL: 'https://github.com/panchoraposo/rhdh/developer-hub.git'
+      repoURL: 'https://github.com/panchoraposo/developer-hub-config.git'
       targetRevision: main
   syncPolicy:
     automated:

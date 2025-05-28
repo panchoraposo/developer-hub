@@ -1,0 +1,373 @@
+global:
+  clusterRouterBase: {{ cluster_subdomain }}
+  host: {{ backstage_host }}
+  dynamic:
+    includes:
+      - dynamic-plugins.default.yaml
+    plugins:
+      # Temporary workaround to patch GitLab scaffolder MR creation (https://github.com/backstage/backstage/pull/28703)
+      # We should have a fix in RHDH 1.6
+      - package: oci://quay.io/evanshortiss/backstage-plugin-scaffolder-backend-module-gitlab-dynamic:0.8.1!backstage-plugin-scaffolder-backend-module-gitlab
+      # - package: ./dynamic-plugins/dist/backstage-plugin-scaffolder-backend-module-gitlab-dynamic
+        disabled: false
+      - package: ./dynamic-plugins/dist/roadiehq-scaffolder-backend-argocd-dynamic
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-plugin-kubernetes-backend-dynamic
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-plugin-kubernetes
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-community-plugin-topology
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-community-plugin-tekton
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-community-plugin-catalog-backend-module-keycloak-dynamic
+        disabled: false
+      - package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-argo-cd-backend-dynamic
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-community-plugin-redhat-argocd
+        disabled: false
+
+      ## --- TECHDOCS_PLUGIN ---
+      # - package: ./dynamic-plugins/dist/backstage-plugin-techdocs-backend-dynamic
+      #   disabled: false
+      # - package: ./dynamic-plugins/dist/backstage-plugin-techdocs
+      #   disabled: false
+      # - package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-gitlab-dynamic
+      #   disabled: false
+      ## --- TECHDOCS_PLUGIN ---
+
+      ## --- DYNAMIC_PLUGINS_IMPORT_COMPONENTS ---
+      # - package: ./dynamic-plugins/dist/roadiehq-scaffolder-backend-module-utils-dynamic
+      #   disabled: false
+      # - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab-backend-dynamic
+      #   disabled: false
+      # - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab
+      #   disabled: false
+      ## --- DYNAMIC_PLUGINS_IMPORT_COMPONENTS ---
+
+      ## --- RBAC ---
+      # - package: ./dynamic-plugins/dist/backstage-community-plugin-rbac
+      #   disabled: false
+      ## --- RBAC ---
+
+      ## --- ORCHESTRATOR PLUGIN ---
+      # - disabled: false
+      #   package: "@redhat/backstage-plugin-orchestrator-backend-dynamic@1.5.1"
+      #   integrity: sha512-VIenFStdq9QvvmgmEMG8O7b2wqIebvEcqNeJ9SWZ8jen9t+efTK6D3Rde74LQ1no1QaHLx8RoxNCOuTUEF8O/g==
+      #   pluginConfig:
+      #     orchestrator:
+      #       dataIndexService:
+      #         url: http://{{ orchestrator_sonataflow_data_index_service }}
+      # - disabled: false
+      #   package: "@redhat/backstage-plugin-orchestrator@1.5.1"
+      #   integrity: sha512-7VOe+XGTUzrdO/av0DNHbydOjB3Lo+XdCs6fj3JVODLP7Ypd3GXHf/nssYxG5ZYC9F1t9MNeguE2bZOB6ckqTA==
+      #   pluginConfig:
+      #     dynamicPlugins:
+      #       frontend:
+      #         red-hat-developer-hub.backstage-plugin-orchestrator:
+      #           appIcons:
+      #             - importName: OrchestratorIcon
+      #               module: OrchestratorPlugin
+      #               name: orchestratorIcon
+      #           dynamicRoutes:
+      #             - importName: OrchestratorPage
+      #               menuItem:
+      #                 icon: orchestratorIcon
+      #                 text: Orchestrator
+      #               module: OrchestratorPlugin
+      #               path: /orchestrator
+      # - disabled: false
+      #   package: "@redhat/backstage-plugin-scaffolder-backend-module-orchestrator-dynamic@1.5.1"
+      #   integrity: sha512-bnVQjVsUZ470Vgm2kd5Lo/bVa2fF0q4GufBDc/8oTQsnP3zZJQqKFvFElBTCjY76RqkECydlvZ1UFybSzvockQ==  
+      #   pluginConfig:
+      #     orchestrator:
+      #       dataIndexService:
+      #         url: http://{{ orchestrator_sonataflow_data_index_service }}
+      # - disabled: false
+      #   package: "./dynamic-plugins/dist/backstage-plugin-notifications"
+      # - disabled: false
+      #   package: "./dynamic-plugins/dist/backstage-plugin-signals"
+      # - disabled: false
+      #   package: "./dynamic-plugins/dist/backstage-plugin-notifications-backend-dynamic"
+      # - disabled: false
+      #   package: "./dynamic-plugins/dist/backstage-plugin-signals-backend-dynamic"
+      ## --- ORCHESTRATOR PLUGIN ---
+
+upstream:
+  postgresql:
+    auth:
+      username: postgres
+      database: backstage
+      existingSecret: backstage-postgresql
+      secretKeys:
+        userPasswordKey: postgres-password
+  backstage:
+    extraEnvVarsSecrets:
+      - gitlab-token
+      - argocd-password
+      - kubernetes-sa-token
+      - oauth-client
+      - backstage-orchestrator-token
+    appConfig:
+      ## --- APP TITLE ---
+      # app:
+      #   title: PE Developer Hub
+      ## --- APP TITLE ---
+
+      ## --- AUTHENTICATION --- 
+      ## This is a development and testing authentication configuration
+      auth:
+        providers:
+          guest:
+            dangerouslyAllowOutsideDevelopment: true
+      ## Configuration required to enable OpenID Connect authentication
+      # auth:
+      #   session:
+      #     secret: ${BACKEND_SECRET}
+      #   environment: production
+      #   providers:
+      #     oidc:
+      #       production:
+      #         prompt: auto
+      #         metadataUrl: https://{{ keycloak_host }}/realms/{{ keycloak_realm }}/.well-known/openid-configuration
+      #         clientId: ${OAUTH_CLIENT_ID}
+      #         clientSecret: ${OAUTH_CLIENT_SECRET}
+      #         signIn:
+      #           resolvers:
+      #             - resolver: preferredUsernameMatchingUserEntityName
+      # signInPage: oidc
+      ## --- AUTHENTICATION --- #
+
+      backend:
+        ## --- ORCHESTRATOR ---
+        # auth:
+        #   externalAccess:
+        #     - type: static
+        #       options:
+        #         token: ${ORCHESTRATOR_TOKEN}
+        #         subject: orchestrator
+        # csp:
+        #   script-src: ["'self'", "'unsafe-inline'", "'unsafe-eval'"]
+        #   script-src-elem: ["'self'", "'unsafe-inline'", "'unsafe-eval'"]
+        #   connect-src: ["'self'", 'http:', 'https:', 'data:']
+        # cors:
+        #   origin: https://{{ backstage_host }}
+        # database:
+        #   client: pg
+        #   connection:
+        #     host: "${POSTGRES_HOST}"
+        #     port: "${POSTGRES_PORT}"
+        #     user: "${POSTGRES_USER}"
+        #     password: "${POSTGRES_PASSWORD}"
+        ## --- ORCHESTRATOR ---
+        listen:
+          port: 7007
+          host: 0.0.0.0        
+
+      integrations:
+        gitlab:
+          - apiBaseUrl: https://{{ gitlab_host }}/api/v4
+            baseUrl: https://{{ gitlab_host }}
+            host: {{ gitlab_host }}
+            token: ${GITLAB_TOKEN}          
+      catalog:
+        rules:
+          - allow: [Component, System, API, Resource, Location, Template, Domain]
+        locations: []
+        providers:
+          
+          ## --- GITLAB_CATALOG_PROVIDER ---
+          # gitlab:
+          #   default:
+          #     host: gitlab-gitlab.{{ cluster_subdomain }}
+          #     branch: main
+          #     fallbackBranch: master
+          #     skipForkedRepos: true
+          #     entityFilename: catalog-info.yaml
+          #     projectPattern: \w*techdocs\w*
+          #     schedule:
+          #       frequency: { minutes: 2 }
+          #       timeout: { minutes: 3 }
+          #       initialDelay: { seconds: 15 }
+          ## --- GITLAB_CATALOG_PROVIDER ---
+
+          ## --- AUTO_DISCOVERY_IMPORT_COMPONENTS ---
+          #   all-location-entity:
+          #     host: gitlab-gitlab.{{ cluster_subdomain }}
+          #     filters:
+          #       branch: main
+          #     skipForkedRepos: true
+          #     entityFilename: all-location.yaml
+          #     catalogPath: /**/all-location.yaml
+          #     projectPattern: \b(all-location\w*)
+          #     excludeRepos: []
+          #     schedule:
+          #       frequency:
+          #         seconds: 15
+          #       initialDelay:
+          #         seconds: 15
+          #       timeout:
+          #         minutes: 3
+          ## --- AUTO_DISCOVERY_IMPORT_COMPONENTS ---
+
+          ## --- KEYCLOAK_CATALOG_PROVIDERS ---
+          # keycloakOrg:
+          #   default:
+          #     baseUrl: https://{{ keycloak_host }}
+          #     realm: {{ keycloak_realm }}
+          #     loginRealm: {{ keycloak_login_realm }}
+          #     clientId: {{ keycloak_client_id }}
+          #     clientSecret: {{ keycloak_client_secret }}
+          #     schedule:
+          #       frequency: { minutes: 2 }
+          #       timeout: { minutes: 1 }
+          #       initialDelay: { seconds: 15 }
+          ## --- KEYCLOAK_CATALOG_PROVIDERS ---
+
+      ## --- TECHDOCS_CONFIG ---
+      # techdocs:
+      #   builder: 'local'
+      #   publisher:
+      #     type: 'local'
+      #   generator:
+      #     runIn: local
+      ## --- TECHDOCS_CONFIG ---
+      argocd:
+        appLocatorMethods:
+          - type: 'config'
+            instances:
+              - name: main
+                url: https://{{ argocd_host }}
+                username: admin
+                password: ${ARGOCD_PASSWORD}
+      kubernetes:
+        serviceLocatorMethod:
+          type: multiTenant
+        clusterLocatorMethods:
+          - clusters:
+              - name: dev-cluster
+                url: {{ kubernetes_api_url }}
+                authProvider: serviceAccount
+                skipTLSVerify: true
+                serviceAccountToken: ${KUBERNETES_SA_TOKEN}
+            type: config
+        customResources:
+          - group: 'tekton.dev'
+            apiVersion: 'v1beta1'
+            plural: 'pipelineruns'
+          - group: 'tekton.dev'
+            apiVersion: 'v1beta1'
+            plural: 'taskruns'
+      ## --- RBAC --- #
+      # permission:
+      #   enabled: true
+      #   rbac:
+      #     admin:
+      #       users:
+      #         - name: user:default/pe1
+      #         - name: user:default/pe2
+      #     policies-csv-file: ./rbac/rbac-policy.csv
+      #     conditionalPoliciesFile: ./rbac/rbac-conditional-policies.yaml
+      ## --- RBAC --- #
+
+    extraEnvVars:
+      - name: NODE_OPTIONS
+        value: --no-node-snapshot
+      - name: BACKEND_SECRET
+        value: {{ backstage_backend_secret }}
+      - name: NODE_TLS_REJECT_UNAUTHORIZED
+        value: "0"
+    ## --- RBAC --- #
+    extraVolumeMounts:
+      - name: dynamic-plugins-root
+        mountPath: /opt/app-root/src/dynamic-plugins-root
+      - name: rbac-policy
+        mountPath: opt/app-root/src/rbac
+    extraVolumes:
+      - name: dynamic-plugins-root
+        persistentVolumeClaim:
+          claimName: dynamic-plugins-root
+      - name: dynamic-plugins
+        configMap:
+          defaultMode: 420
+          name: '{{ '{{ printf "%s-dynamic-plugins" .Release.Name }}' }}'
+          optional: true
+      - name: dynamic-plugins-npmrc
+        secret:
+          defaultMode: 420
+          optional: true
+          secretName: '{{ '{{ printf "%s-dynamic-plugins-npmrc" .Release.Name }}' }}'
+      - name: dynamic-plugins-registry-auth
+        secret:
+          defaultMode: 416
+          optional: true
+          secretName: '{{ '{{ printf "%s-dynamic-plugins-registry-auth" .Release.Name }}' }}'
+      - name: npmcacache
+        emptyDir: {}
+      - name: temp
+        emptyDir: {}
+      - name: rbac-policy
+        configMap:
+          name: rbac-policy
+          defaultMode: 420
+    ## --- RBAC --- #
+
+    initContainers:
+      - name: install-dynamic-plugins
+        resources:
+          requests:
+            cpu: 250m
+            memory: 256Mi
+          limits:
+            cpu: 1000m
+            memory: 2.5Gi
+            ephemeral-storage: 5Gi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["ALL"]
+          runAsNonRoot: true
+          seccompProfile:
+            type: "RuntimeDefault"
+        image: '{{ '{{ include "backstage.image" . }}' }}'
+        command:
+          - ./install-dynamic-plugins.sh
+          - /dynamic-plugins-root
+        env:
+          - name: NPM_CONFIG_USERCONFIG
+            value: /opt/app-root/src/.npmrc.dynamic-plugins
+          - name: MAX_ENTRY_SIZE
+            value: "30000000"
+        imagePullPolicy: Always
+        volumeMounts:
+          - mountPath: /dynamic-plugins-root
+            name: dynamic-plugins-root
+          - mountPath: /opt/app-root/src/dynamic-plugins.yaml
+            name: dynamic-plugins
+            readOnly: true
+            subPath: dynamic-plugins.yaml
+          - mountPath: /opt/app-root/src/.npmrc.dynamic-plugins
+            name: dynamic-plugins-npmrc
+            readOnly: true
+            subPath: .npmrc
+          - mountPath: /opt/app-root/src/.config/containers
+            name: dynamic-plugins-registry-auth
+            readOnly: true
+          - mountPath: /opt/app-root/src/.npm/_cacache
+            name: npmcacache
+        workingDir: /opt/app-root/src
+
+  service:
+    ports:
+      backend: 7007
+      targetPort: backend
+
+  ## --- MONITORING ---
+  # metrics:
+  #   serviceMonitor:
+  #     enabled: true
+  #     path: /metrics
+  ## --- MONITORING ---      
+
+route:
+  host: {{ backstage_host }}
