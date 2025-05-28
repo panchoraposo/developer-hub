@@ -3,8 +3,6 @@ kind: Application
 metadata:
   name: backstage
   namespace: openshift-gitops
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io/foreground
   labels:
     app.kubernetes.io/instance: backstage-bootstrap
 spec:
@@ -17,11 +15,11 @@ spec:
     - chart: redhat-developer-hub
       helm:
         valueFiles:
-          - values.yaml
+          - $values/values.yaml
       repoURL: 'https://charts.openshift.io'
-      targetRevision: 1.5.1
+      targetRevision: 1.6.1
     - ref: values
-      repoURL: 'https://github.com/redhat-pe-workshop/developer-hub-config.git'
+      repoURL: 'https://github.com/panchoraposo/developer-hub-config.git'
       targetRevision: main
   syncPolicy:
     automated:
