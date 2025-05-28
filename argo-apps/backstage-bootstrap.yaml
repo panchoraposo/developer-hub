@@ -11,7 +11,7 @@ spec:
     server: 'https://kubernetes.default.svc'
   project: default
   path: rhdh
-    repoURL: 'https://github.com/panchoraposo/developer-hub.git'
+  repoURL: 'https://github.com/panchoraposo/developer-hub.git'
   syncPolicy:
     automated:
       prune: true
