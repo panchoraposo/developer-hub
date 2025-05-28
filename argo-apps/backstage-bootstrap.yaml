@@ -10,8 +10,9 @@ spec:
     namespace: backstage
     server: 'https://kubernetes.default.svc'
   project: default
-  path: rhdh
-  repoURL: 'https://github.com/panchoraposo/developer-hub.git'
+  source:
+    path: rhdh
+    repoURL: 'https://github.com/panchoraposo/developer-hub.git'
   syncPolicy:
     automated:
       prune: true
