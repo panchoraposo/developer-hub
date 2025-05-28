@@ -1,3 +1,4 @@
 resources:
   - ../../base
+  - rolebinding.yaml
   - developerhub-instance.yaml
