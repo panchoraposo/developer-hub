@@ -17,7 +17,7 @@ spec:
     - chart: redhat-developer-hub
       helm:
         valueFiles:
-          - $values/values.yaml
+          - values.yaml
       repoURL: 'https://charts.openshift.io'
       targetRevision: 1.5.1
     - ref: values
