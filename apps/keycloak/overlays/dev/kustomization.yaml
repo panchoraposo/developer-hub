@@ -1,5 +1,9 @@
 resources:
   - ../../base
-  #- keycloak-realm.yaml
-  #- keycloak-users.yaml
-  - secrets.yaml
+
+secretGenerator:
+  - name: rhbk-tls-secret
+    files:
+      - tls/tls.crt
+      - tls/tls.key
+    type: kubernetes.io/tls
