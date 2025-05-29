@@ -1,4 +1,4 @@
-apiVersion: keycloak.org/v1alpha1
+apiVersion: keycloak.org/v2alpha1
 kind: KeycloakRealm
 metadata:
   name: developer-hub-realm
