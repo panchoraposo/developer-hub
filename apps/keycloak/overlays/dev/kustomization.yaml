@@ -1,5 +1,6 @@
 resources:
   - ../../base
+  - rolebinding.yaml
   - keycloak-instance.yaml
   - keycloak-realm.yaml
   - keycloak-users.yaml
