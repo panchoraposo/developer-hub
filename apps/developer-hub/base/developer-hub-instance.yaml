@@ -13,4 +13,4 @@ spec:
     route:
       enabled: true
   database:
-    enableLocalDb: false
+    enableLocalDb: true
