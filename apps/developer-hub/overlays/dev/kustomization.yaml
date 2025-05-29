@@ -1,2 +1,3 @@
 resources:
   - developer-hub-instance.yaml
+  - developer-hub-config.yaml
