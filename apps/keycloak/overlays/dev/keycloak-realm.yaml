@@ -1,13 +1,55 @@
-apiVersion: k8s.keycloak.org/v2alpha1
+apiVersion: keycloak.org/v1alpha1
 kind: KeycloakRealm
 metadata:
-  name: backstage-realm
-  namespace: keycloak
+  name: developer-hub-realm
+  labels:
+    app: sso
 spec:
+  instanceSelector:
+    matchLabels:
+      app: keycloak
   realm:
-    id: backstage
-    realm: backstage
-    displayName: Developer Hub Realm
+    id: developer-hub
+    realm: developer-hub
     enabled: true
-  instanceRef:
-    name: keycloak
+    displayName: Developer Hub
+    users:
+      - username: dev1
+        enabled: true
+        email: dev1@example.com
+        firstName: Dev
+        lastName: One
+        credentials:
+          - type: password
+            value: dev123
+      - username: dev2
+        enabled: true
+        credentials:
+          - type: password
+            value: dev123
+      - username: dev3
+        enabled: true
+        credentials:
+          - type: password
+            value: dev123
+      - username: platform1
+        enabled: true
+        credentials:
+          - type: password
+            value: plat123
+      - username: platform2
+        enabled: true
+        credentials:
+          - type: password
+            value: plat123
+      - username: platform3
+        enabled: true
+        credentials:
+          - type: password
+            value: plat123
+    roles:
+      realm:
+        - name: developer
+        - name: platform-engineer
+    defaultRoles:
+      - developer
