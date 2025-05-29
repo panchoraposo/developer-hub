@@ -16,12 +16,3 @@ spec:
     tlsSecret: rhbk-tls-secret
   hostname:
     hostname: rhbk.apps.cluster-rq2p2.rq2p2.sandbox1714.opentlc.com
-  database:
-    hostname: keycloak-db
-    databaseName: keycloak
-    usernameSecret:
-      name: keycloak-db-secret
-      key: username
-    passwordSecret:
-      name: keycloak-db-secret
-      key: password
