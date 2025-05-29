@@ -1,0 +1,14 @@
+apiVersion: keycloak.org/v1alpha1
+kind: KeycloakRealm
+metadata:
+  name: developer-hub-realm
+  namespace: keycloak
+spec:
+  realm:
+    id: developer-hub
+    realm: developer-hub
+    enabled: true
+    displayName: Developer Hub Realm
+  instanceSelector:
+    matchLabels:
+      app: keycloak

@@ -6,3 +6,31 @@ backend:
   listen:
     port: 7007
     host: 0.0.0.0
+
+auth:
+  environment: development
+  providers:
+    keycloak:
+      development:
+        clientId: backstage
+        clientSecret: ${KEYCLOAK_CLIENT_SECRET}
+        issuer: https://keycloak-keycloak.apps.cluster-8j8mx.8j8mx.sandbox581.opentlc.com/auth/realms/developer-hub
+  
+  signIn:
+  resolvers:
+    - resolver: keycloak
+      type: keycloak
+      options:
+        tokenIssuer: https://keycloak-keycloak.apps.cluster-8j8mx.8j8mx.sandbox581.opentlc.com/auth/realms/developer-hub
+  
+  catalog:
+    rules:
+      - allow: [Component, System, API, Resource, Location, Template, User, Group]
+
+  permission:
+    enabled: true
+    rbac:
+      admin:
+        group: platform-engineers
+      user:
+        group: developers

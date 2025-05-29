@@ -1,0 +1,46 @@
+apiVersion: keycloak.org/v1alpha1
+kind: KeycloakUser
+metadata:
+  name: dev-users
+  namespace: keycloak
+spec:
+  realmSelector:
+    matchLabels:
+      app: keycloak
+  users:
+    - username: dev1
+      enabled: true
+      credentials:
+        - type: password
+          value: dev123
+      groups: ["/developers"]
+    - username: dev2
+      enabled: true
+      credentials:
+        - type: password
+          value: dev123
+      groups: ["/developers"]
+    - username: dev3
+      enabled: true
+      credentials:
+        - type: password
+          value: dev123
+      groups: ["/developers"]
+    - username: pe1
+      enabled: true
+      credentials:
+        - type: password
+          value: pe123
+      groups: ["/platform-engineers"]
+    - username: pe2
+      enabled: true
+      credentials:
+        - type: password
+          value: pe123
+      groups: ["/platform-engineers"]
+    - username: pe3
+      enabled: true
+      credentials:
+        - type: password
+          value: pe123
+      groups: ["/platform-engineers"]
