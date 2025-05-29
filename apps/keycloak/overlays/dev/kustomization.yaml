@@ -1,5 +1,5 @@
 resources:
   - ../../base
-  - keycloak-realm.yaml
-  - keycloak-users.yaml
-  - secrets.yaml
+  #- keycloak-realm.yaml
+  #- keycloak-users.yaml
+  #- secrets.yaml

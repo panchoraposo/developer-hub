@@ -1,4 +1,4 @@
 resources:
-  - keycloak-instance.yaml
   - postgresql-deployment.yaml
   - postgresql-service.yaml
+  #- keycloak-instance.yaml
