@@ -3,6 +3,8 @@ kind: KeycloakRealmImport
 metadata:
   name: backstage-realm
   namespace: keycloak
+  annotations:
+    keycloak.org/reconciliation-strategy: skip
 spec:
   keycloakCRName: rhbk
   realm:
