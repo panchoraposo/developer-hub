@@ -7,3 +7,5 @@ secretGenerator:
       - tls/certificate.pem
       - tls/key.pem
     type: kubernetes.io/tls
+    options:
+      disableNameSuffixHash: true
