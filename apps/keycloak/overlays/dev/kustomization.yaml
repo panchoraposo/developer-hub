@@ -2,4 +2,4 @@ resources:
   - ../../base
   #- keycloak-realm.yaml
   #- keycloak-users.yaml
-  #- secrets.yaml
+  - secrets.yaml
