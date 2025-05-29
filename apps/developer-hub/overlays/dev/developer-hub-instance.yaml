@@ -5,11 +5,7 @@ metadata:
   namespace: backstage
 spec:
   application:
-    appConfig:
-      configMapRef:
-        name: developer-hub-config
-    extraFiles:
-      mountPath: /opt/app-root/src
+    configMapRef: developer-hub-config
     replicas: 1
     route:
       enabled: true
