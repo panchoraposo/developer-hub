@@ -1,4 +1,2 @@
 resources:
-  - namespace.yaml
-  - operator-group.yaml
-  - subscription.yaml
+  - keycloak-instance.yaml

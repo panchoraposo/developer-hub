@@ -1,0 +1,20 @@
+apiVersion: k8s.keycloak.org/v2alpha1
+kind: KeycloakRealmRole
+metadata:
+  name: developer-role
+  namespace: keycloak
+spec:
+  name: developer
+  realmRef:
+    name: backstage-realm
+
+---
+apiVersion: k8s.keycloak.org/v2alpha1
+kind: KeycloakRealmRole
+metadata:
+  name: platform-role
+  namespace: keycloak
+spec:
+  name: platform-engineer
+  realmRef:
+    name: backstage-realm

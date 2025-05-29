@@ -1,14 +1,13 @@
-apiVersion: keycloak.org/v1alpha1
+apiVersion: k8s.keycloak.org/v2alpha1
 kind: KeycloakRealm
 metadata:
-  name: developer-hub-realm
+  name: backstage-realm
   namespace: keycloak
 spec:
   realm:
-    id: developer-hub
-    realm: developer-hub
-    enabled: true
+    id: backstage
+    realm: backstage
     displayName: Developer Hub Realm
-  instanceSelector:
-    matchLabels:
-      app: keycloak
+    enabled: true
+  instanceRef:
+    name: keycloak
