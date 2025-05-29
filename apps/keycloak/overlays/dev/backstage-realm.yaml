@@ -1,0 +1,71 @@
+apiVersion: k8s.keycloak.org/v1alpha1
+kind: KeycloakRealmImport
+metadata:
+  name: backstage-realm
+  namespace: keycloak
+spec:
+  keycloakCRName: rhbk
+  realm:
+    id: backstage
+    realm: backstage
+    enabled: true
+    displayName: Backstage Realm
+    users:
+      - username: dev1
+        enabled: true
+        emailVerified: true
+        firstName: Dev
+        lastName: One
+        credentials:
+          - type: password
+            value: devpassword
+        realmRoles:
+          - developer
+
+      - username: dev2
+        enabled: true
+        credentials:
+          - type: password
+            value: devpassword
+        realmRoles:
+          - developer
+
+      - username: dev3
+        enabled: true
+        credentials:
+          - type: password
+            value: devpassword
+        realmRoles:
+          - developer
+
+      - username: pe1
+        enabled: true
+        credentials:
+          - type: password
+            value: pepassword
+        realmRoles:
+          - platform-engineer
+
+      - username: pe2
+        enabled: true
+        credentials:
+          - type: password
+            value: pepassword
+        realmRoles:
+          - platform-engineer
+
+      - username: pe3
+        enabled: true
+        credentials:
+          - type: password
+            value: pepassword
+        realmRoles:
+          - platform-engineer
+
+    roles:
+      realm:
+        - name: developer
+          description: Developer access in Backstage
+
+        - name: platform-engineer
+          description: Platform Engineer access in Backstage
