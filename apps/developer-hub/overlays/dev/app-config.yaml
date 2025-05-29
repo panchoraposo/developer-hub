@@ -6,10 +6,3 @@ backend:
   listen:
     port: 7007
     host: 0.0.0.0
-
-techdocs:
-  builder: local
-  generator:
-    runIn: docker
-  publisher:
-    type: local
