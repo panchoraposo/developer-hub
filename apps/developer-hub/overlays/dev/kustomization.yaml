@@ -1,3 +1,10 @@
 resources:
-  - developer-hub-config.yaml
-  - developer-hub-instance.yaml
+  - ../../base
+  - developerhub-instance.yaml
+
+configMapGenerator:
+  - name: developer-hub-config
+    files:
+      - app-config.yaml
+    options:
+      disableNameSuffixHash: true
