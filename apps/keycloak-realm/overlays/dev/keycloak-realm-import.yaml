@@ -4,6 +4,6 @@ metadata:
   name: backstage-realm-import
   namespace: keycloak
 spec:
-  keycloakCRName: rhbk
+  keycloakCRName: keycloak
   realm:
     $import: /realm/backstage-realm.json
