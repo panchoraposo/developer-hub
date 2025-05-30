@@ -1,10 +1,3 @@
 resources:
   - ../../base
-  - backstage-realm.yaml
-
-configMapGenerator:
-  - name: backstage-realm-config
-    files:
-      - backstage-realm.json
-    options:
-      disableNameSuffixHash: true
+  - keycloak-instance.yaml

@@ -1,4 +1,11 @@
 resources:
   - postgresql-deployment.yaml
   - postgresql-service.yaml
-  - keycloak-instance.yaml
+  - backstage-realm.yaml
+
+configMapGenerator:
+  - name: backstage-realm-config
+    files:
+      - backstage-realm.json
+    options:
+      disableNameSuffixHash: true
