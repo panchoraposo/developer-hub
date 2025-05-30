@@ -1,6 +1,3 @@
-resources:
-  - realm-import.yaml
-  
 configMapGenerator:
   - name: backstage-realm-config
     files:
