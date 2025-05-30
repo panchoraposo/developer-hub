@@ -1,8 +1,45 @@
 app:
-  title: Demo Red Hat Developer Hub
+  title: Backstage on OpenShift
 
 backend:
-  baseUrl: http://localhost:7007
+  baseUrl: http://backstage-developer-hub.backstage.svc.cluster.local:7007
   listen:
     port: 7007
     host: 0.0.0.0
+
+auth:
+  environment: development
+  providers:
+    keycloak:
+      development:
+        clientId: backstage
+        clientSecret: ${KEYCLOAK_CLIENT_SECRET}
+        issuer: https://keycloak.apps.cluster-5vfz9.5vfz9.sandbox539.opentlc.com/realms/backstage
+
+signIn:
+  resolvers:
+    keycloak:
+      resolver: group
+  providers:
+    keycloak:
+      development:
+        signIn:
+          resolver:
+            resolver: group
+            options:
+              groupClaim: groups
+
+permission:
+  enabled: true
+
+catalog:
+  rules:
+    - allow: [Component, System, API, Group, User, Template, Location]
+  providers:
+    keycloakOrg:
+      default:
+        url: https://keycloak.apps.cluster-5vfz9.5vfz9.sandbox539.opentlc.com
+        realm: backstage
+
+organization:
+  name: Parasol

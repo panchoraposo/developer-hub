@@ -8,6 +8,7 @@ spec:
       mountPath: /opt/app-root/src
       configMaps:
          - name: developer-hub-config
+         - name: backstage-custom-config
     env:
       - name: KEYCLOAK_CLIENT_SECRET
         valueFrom:
