@@ -1,4 +1,3 @@
 resources:
   - postgresql-deployment.yaml
   - postgresql-service.yaml
-  - backstage-realm.yaml
