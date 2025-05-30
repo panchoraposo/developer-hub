@@ -8,5 +8,5 @@ spec:
   realm:
     from:
       configMap:
-        name: backstage-realm
+        name: backstage-realm-config
         key: backstage-realm.json
