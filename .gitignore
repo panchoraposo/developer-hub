@@ -18,3 +18,7 @@
 .ionide
 
 .DS_Store
+
+backstage-realm.*
+*.crt
+*.pem
