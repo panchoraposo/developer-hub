@@ -1,0 +1,9 @@
+resources:
+  - realm-import.yaml
+  
+configMapGenerator:
+  - name: backstage-realm-config
+    files:
+      - backstage-realm.json
+    options:
+      disableNameSuffixHash: true

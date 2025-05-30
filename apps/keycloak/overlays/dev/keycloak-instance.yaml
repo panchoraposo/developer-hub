@@ -5,6 +5,7 @@ metadata:
   namespace: keycloak
   annotations:
     argocd.argoproj.io/sync-options: Prune=false,Replace=false
+    keycloak.org/realm-import-configmap: backstage-realm-config
   labels:
     app: sso
 spec:
@@ -18,4 +19,4 @@ spec:
   http:
     tlsSecret: rhbk-tls-secret
   hostname:
-    hostname: rhbk.apps.cluster-rq2p2.rq2p2.sandbox1714.opentlc.com
+    hostname: keycloak.apps.cluster-5vfz9.5vfz9.sandbox539.opentlc.com
