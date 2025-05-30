@@ -7,19 +7,3 @@ spec:
   keycloakCRName: rhbk
   realm:
     $import: /realm/backstage-realm.json
----
-apiVersion: v1
-kind: Pod
-metadata:
-  name: keycloak-realm-import-volumes
-  namespace: keycloak
-spec:
-  volumes:
-    - name: realm-config
-      configMap:
-        name: backstage-realm-config
-  containers:
-    - name: keycloak
-      volumeMounts:
-        - name: realm-config
-          mountPath: /realm
