@@ -1,6 +1,6 @@
 resources:
   - ../../base
-  - backstage-realm.yaml
+  #- backstage-realm.yaml
 
 #secretGenerator:
 #  - name: rhbk-tls-secret
