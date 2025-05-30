@@ -1,5 +1,5 @@
 configMapGenerator:
-  - name: backstage-realm-config
+  - name: backstage-realm
     files:
       - backstage-realm.json
     options:
