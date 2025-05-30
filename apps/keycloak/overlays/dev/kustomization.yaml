@@ -1,12 +1,10 @@
 resources:
   - ../../base
-  #- backstage-realm.yaml
+  - backstage-realm.yaml
 
-#secretGenerator:
-#  - name: rhbk-tls-secret
-#    files:
-#      - tls/certificate.pem
-#      - tls/key.pem
-#    type: kubernetes.io/tls
-#    options:
-#      disableNameSuffixHash: true
+configMapGenerator:
+  - name: backstage-realm-config
+    files:
+      - backstage-realm.json
+    options:
+      disableNameSuffixHash: true
