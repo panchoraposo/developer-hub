@@ -8,6 +8,25 @@ backend:
     host: 0.0.0.0
 
 auth:
+#  providers:
+#    guest:
+#      dangerouslyAllowOutsideDevelopment: true
+  environment: production
   providers:
-    guest:
-      dangerouslyAllowOutsideDevelopment: true
+    oauth2Proxy: {}
+signInPage: oauth2Proxy
+catalog:
+  providers:
+  ## --- KEYCLOAK_CATALOG_PROVIDERS ---
+    keycloakOrg:
+      default:
+        baseUrl: https://keycloak.apps.cluster-wcw7c.wcw7c.sandbox432.opentlc.com/
+        loginRealm: backstage
+        realm: backstage
+        clientId: backstage
+        clientSecret: x2KHIVnsODqQEkkOlPXRBSrp90IQbmYf
+        schedule:
+          frequency: 2
+          timeout: 1
+          initialDelay: 15
+  ## --- KEYCLOAK_CATALOG_PROVIDERS ---
