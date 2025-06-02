@@ -26,7 +26,7 @@ catalog:
         clientId: backstage
         clientSecret: x2KHIVnsODqQEkkOlPXRBSrp90IQbmYf
         schedule:
-          frequency: 2
-          timeout: 1
-          initialDelay: 15
+          frequency: { minutes: 2 }
+          timeout: { minutes: 1 }
+          initialDelay: { seconds: 15 }
   ## --- KEYCLOAK_CATALOG_PROVIDERS ---
