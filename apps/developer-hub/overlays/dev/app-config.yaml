@@ -11,14 +11,23 @@ backend:
     port: 7007
     host: 0.0.0.0
 
+permission:
+  enabled: true
+  policy: plugin
+
 auth:
 #  providers:
 #    guest:
 #      dangerouslyAllowOutsideDevelopment: true
   environment: production
   providers:
-    oauth2Proxy: {}
-signInPage: oauth2Proxy
+    keycloak:
+      production:
+        clientId: backstage
+        clientSecret: x2KHIVnsODqQEkkOlPXRBSrp90IQbmYf
+        issuer: https://keycloak.apps.cluster-wcw7c.wcw7c.sandbox432.opentlc.com/realms/backstage
+signInPage: keycloak
+
 catalog:
   providers:
   ## --- KEYCLOAK_CATALOG_PROVIDERS ---
