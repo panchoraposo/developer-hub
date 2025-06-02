@@ -1,6 +1,6 @@
 resources:
   - ../../base
-  - rhdh-custom-config.yaml
+  - dynamic-plugins-rhdh.yaml
   
 configMapGenerator:
   - name: developer-hub-config

@@ -4,17 +4,11 @@ metadata:
   name: developer-hub
 spec:
   application:
+    dynamicPluginsConfigMapName: dynamic-plugins-rhdh
     appConfig:
       mountPath: /opt/app-root/src
       configMaps:
          - name: developer-hub-config
-         - name: backstage-custom-config
-    env:
-      - name: KEYCLOAK_CLIENT_SECRET
-        valueFrom:
-          secretKeyRef:
-            name: keycloak-client-secret
-            key: KEYCLOAK_CLIENT_SECRET
     replicas: 1
     route:
       enabled: true
