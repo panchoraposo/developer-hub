@@ -2,6 +2,10 @@ app:
   title: Backstage on OpenShift
 
 backend:
+  cors:
+    origin: 'https://backstage-developer-hub-backstage.apps.cluster-wcw7c.wcw7c.sandbox432.opentlc.com'
+    methods: [GET, POST, PUT, DELETE]
+    credentials: true
   baseUrl: http://backstage-developer-hub.backstage.svc.cluster.local:7007
   listen:
     port: 7007
