@@ -12,4 +12,4 @@ data:
       - package: ./dynamic-plugins/dist/backstage-plugin-kubernetes
         disabled: true
       - package: ./dynamic-plugins/dist/backstage-community-plugin-topology
-        disabled: true
+        disabled: false
