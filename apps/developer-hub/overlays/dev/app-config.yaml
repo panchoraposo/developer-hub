@@ -2,32 +2,34 @@ app:
   title: Backstage on OpenShift
 
 backend:
-  cors:
-    origin: 'https://backstage-developer-hub-backstage.apps.cluster-wcw7c.wcw7c.sandbox432.opentlc.com'
-    methods: [GET, POST, PUT, DELETE]
-    credentials: true
   baseUrl: http://backstage-developer-hub.backstage.svc.cluster.local:7007
   listen:
     port: 7007
     host: 0.0.0.0
 
-permission:
-  enabled: true
-  policy: plugin
-
-auth:
-#  providers:
-#    guest:
+# --- AUTHENTICATION ---
+## Development configuration
+# auth:
+#   providers:
+#     guest:
 #      dangerouslyAllowOutsideDevelopment: true
+
+## Configuration required to enable OpenID Connect authentification
+auth:
+  session:
+    secret: ${BACKEND_SECRET}
   environment: production
   providers:
-    keycloak:
+    oidc:
       production:
+        prompt: auto
+        metadataUrl: https://keycloak.apps.cluster-wcw7c.wcw7c.sandbox432.opentlc.com/realms/backstage/.well-known/openid-configuration
         clientId: backstage
         clientSecret: x2KHIVnsODqQEkkOlPXRBSrp90IQbmYf
-        issuer: https://keycloak.apps.cluster-wcw7c.wcw7c.sandbox432.opentlc.com/realms/backstage
-signInPage: keycloak
-
+        signIn:
+          resolvers:
+            - resolver: preferredUsernameMatchingUserEntityName
+signInPage: oidc
 catalog:
   providers:
   ## --- KEYCLOAK_CATALOG_PROVIDERS ---
@@ -41,5 +43,5 @@ catalog:
         schedule:
           frequency: { minutes: 2 }
           timeout: { minutes: 1 }
-          initialDelay: { seconds: 15 }
+          initialDelay: { seconds: 15}
   ## --- KEYCLOAK_CATALOG_PROVIDERS ---
