@@ -2,7 +2,7 @@ app:
   title: Backstage on OpenShift
 
 backend:
-  baseUrl: http://backstage-developer-hub.backstage.svc.cluster.local:7007
+  baseUrl: https://backstage-developer-hub-backstage.apps.cluster-wcw7c.wcw7c.sandbox432.opentlc.com
   listen:
     port: 7007
     host: 0.0.0.0
