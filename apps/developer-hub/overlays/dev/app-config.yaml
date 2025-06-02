@@ -2,7 +2,7 @@ app:
   title: Backstage on OpenShift
 
 backend:
-  baseUrl: https://backstage-developer-hub-backstage.apps.cluster-wcw7c.wcw7c.sandbox432.opentlc.com
+  baseUrl: https://backstage-developer-hub-backstage.<WILDCARD_APPS_OPENSHIFT>
   listen:
     port: 7007
     host: 0.0.0.0
@@ -23,23 +23,25 @@ auth:
     oidc:
       production:
         prompt: auto
-        metadataUrl: https://keycloak.apps.cluster-wcw7c.wcw7c.sandbox432.opentlc.com/realms/backstage/.well-known/openid-configuration
-        clientId: backstage
-        clientSecret: x2KHIVnsODqQEkkOlPXRBSrp90IQbmYf
+        metadataUrl: https://keycloak.{openshift_cluster_ingress_domain}/realms/backstage/.well-known/openid-configuration
+        clientId: ${OAUTH_CLIENT_ID}
+        clientSecret: ${OAUTH_CLIENT_SECRET}
         signIn:
           resolvers:
             - resolver: preferredUsernameMatchingUserEntityName
+
 signInPage: oidc
+
 catalog:
   providers:
   ## --- KEYCLOAK_CATALOG_PROVIDERS ---
     keycloakOrg:
       default:
-        baseUrl: https://keycloak.apps.cluster-wcw7c.wcw7c.sandbox432.opentlc.com/
+        baseUrl: https://keycloak.{openshift_cluster_ingress_domain}
         loginRealm: backstage
         realm: backstage
-        clientId: backstage
-        clientSecret: x2KHIVnsODqQEkkOlPXRBSrp90IQbmYf
+        clientId: ${OAUTH_CLIENT_ID}
+        clientSecret: ${OAUTH_CLIENT_SECRET}
         schedule:
           frequency: { minutes: 2 }
           timeout: { minutes: 1 }
