@@ -4,7 +4,7 @@ metadata:
   name: keycloak
   namespace: keycloak
 spec:
-  channel: stable-v24
+  channel: stable-v26.2
   name: rhbk-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
