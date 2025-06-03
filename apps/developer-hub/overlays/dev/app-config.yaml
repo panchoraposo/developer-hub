@@ -35,9 +35,10 @@ signInPage: oidc
 catalog:
   locations:
     - type: url
-      target: https://raw.githubusercontent.com/redhat-pe-workshop/parasol-catalog-all/refs/heads/main/catalog-all.yaml
+      target: https://raw.githubusercontent.com/backstage/backstage/refs/heads/master/packages/catalog-model/examples/all-components.yaml
   rules:
     - allow: [Component, System, API, Resource, Location, Template, Domain]
+  
   providers:
   ## --- KEYCLOAK_CATALOG_PROVIDERS ---
     keycloakOrg:
