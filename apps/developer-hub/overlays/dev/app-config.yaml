@@ -49,16 +49,16 @@ catalog:
   ## --- KEYCLOAK_CATALOG_PROVIDERS ---
 
   ## --- RBAC --- #
-  permission:
-    enabled: true
-    rbac:
-      admin:
-        users:
-          - name: user:default/pe1
-      #         - name: user:default/pe2
-      policies-csv-file: ./rbac/rbac-policy.csv
-      conditionalPoliciesFile: ./rbac/rbac-conditional-policies.yaml
-      ## --- RBAC --- #
+permission:
+  enabled: true
+  rbac:
+    admin:
+      users:
+        - name: user:default/pe1
+    #         - name: user:default/pe2
+    policies-csv-file: ./rbac/rbac-policy.csv
+    conditionalPoliciesFile: ./rbac/rbac-conditional-policies.yaml
+    ## --- RBAC --- #
 
 extraEnvVars:
   - name: NODE_OPTIONS
