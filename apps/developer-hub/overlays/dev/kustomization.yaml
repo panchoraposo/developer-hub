@@ -1,7 +1,6 @@
 resources:
   - ../../base
   - dynamic-plugins-rhdh.yaml
-  - rbac-policy-configmap.yaml
   
 configMapGenerator:
   - name: developer-hub-config
