@@ -1,4 +1,3 @@
-# Platform Engineers
 group:platform-engineers,action:catalog-entity.read
 group:platform-engineers,action:catalog-entity.create
 group:platform-engineers,action:catalog-import.ui
@@ -7,8 +6,6 @@ group:platform-engineers,action:scaffolder.action.execute
 group:platform-engineers,action:scaffolder.create
 group:platform-engineers,action:scaffolder.read
 group:platform-engineers,action:scaffolder.list
-
-# Developers
 group:developers,action:catalog-entity.read
 group:developers,action:scaffolder.template.read
 group:developers,action:scaffolder.action.execute
