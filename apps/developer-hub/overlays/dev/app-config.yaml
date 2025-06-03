@@ -2,7 +2,7 @@ app:
   title: Backstage on OpenShift
 
 backend:
-  baseUrl: https://backstage-developer-hub-backstage.{openshift_cluster_ingress_domain}
+  baseUrl: https://backstage-developer-hub-backstage.$(openshift_cluster_ingress_domain)
   listen:
     port: 7007
     host: 0.0.0.0
@@ -23,7 +23,7 @@ auth:
     oidc:
       production:
         prompt: auto
-        metadataUrl: https://keycloak.{openshift_cluster_ingress_domain}/realms/backstage/.well-known/openid-configuration
+        metadataUrl: https://keycloak.$(openshift_cluster_ingress_domain)/realms/backstage/.well-known/openid-configuration
         clientId: ${OAUTH_CLIENT_ID}
         clientSecret: ${OAUTH_CLIENT_SECRET}
         signIn:
@@ -37,7 +37,7 @@ catalog:
   ## --- KEYCLOAK_CATALOG_PROVIDERS ---
     keycloakOrg:
       default:
-        baseUrl: https://keycloak.{openshift_cluster_ingress_domain}
+        baseUrl: https://keycloak.$(openshift_cluster_ingress_domain)
         loginRealm: backstage
         realm: backstage
         clientId: ${OAUTH_CLIENT_ID}
