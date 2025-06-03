@@ -35,7 +35,7 @@ signInPage: oidc
 catalog:
   locations:
     - type: url
-      target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/components/artist-lookup-component.yaml
+      target: https://raw.githubusercontent.com/redhat-pe-workshop/parasol-catalog-all/refs/heads/main/catalog-all.yaml
   rules:
     - allow: [Component, System, API, Resource, Location, Template, Domain]
   providers:
