@@ -33,6 +33,9 @@ auth:
 signInPage: oidc
 
 catalog:
+  rules:
+    - allow: [Component, System, API, Resource, Location, Template, Domain]
+  locations: []
   providers:
   ## --- KEYCLOAK_CATALOG_PROVIDERS ---
     keycloakOrg:
