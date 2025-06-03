@@ -19,4 +19,4 @@ spec:
   http:
     tlsSecret: rhbk-tls-secret
   hostname:
-    hostname: keycloak.apps.cluster-wcw7c.wcw7c.sandbox432.opentlc.com
+    hostname: keycloak.${OPENSHIFT_CLUSTER_INGRESS_DOMAIN}
