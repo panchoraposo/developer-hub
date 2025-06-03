@@ -105,5 +105,10 @@ extraVolumes:
 ## --- RBAC --- #
 
 scaffolder:
-  orchestrator:
-    type: built-in
+  enabled: true
+  defaultAuthor:
+    name: Red Hat Developer Hub
+    email: rhdh@example.com
+  templaters:
+    cookiecutter:
+      cookiecutterCommand: cookiecutter
