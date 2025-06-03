@@ -1,5 +1,5 @@
 app:
-  title: Backstage on OpenShift
+  title: Red Hat Developer Hub on OpenShift
 
 backend:
   baseUrl: https://backstage-developer-hub-backstage.${OPENSHIFT_CLUSTER_INGRESS_DOMAIN}
@@ -48,7 +48,15 @@ catalog:
           initialDelay: { seconds: 15}
   ## --- KEYCLOAK_CATALOG_PROVIDERS ---
 
-  ## --- RBAC --- #
+## --- KEYCLOAK ---
+extraEnvVars:
+  - name: NODE_OPTIONS
+    value: --no-node-snapshot
+  - name: NODE_TLS_REJECT_UNAUTHORIZED
+    value: "0"
+## --- KEYCLOAK ---
+
+## --- RBAC --- #
 permission:
   enabled: true
   rbac:
@@ -58,15 +66,7 @@ permission:
     #         - name: user:default/pe2
     #policies-csv-file: ./rbac/rbac-policy.csv
     #conditionalPoliciesFile: ./rbac/rbac-conditional-policies.yaml
-    ## --- RBAC --- #
 
-extraEnvVars:
-  - name: NODE_OPTIONS
-    value: --no-node-snapshot
-  - name: NODE_TLS_REJECT_UNAUTHORIZED
-    value: "0"
-
-## --- RBAC --- #
 extraVolumeMounts:
   - name: dynamic-plugins-root
     mountPath: /opt/app-root/src/dynamic-plugins-root
