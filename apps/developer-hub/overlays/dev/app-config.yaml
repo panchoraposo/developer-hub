@@ -100,3 +100,7 @@ extraVolumes:
       name: rbac-policy
       defaultMode: 420
 ## --- RBAC --- #
+
+scaffolder:
+  orchestrator:
+    type: built-in
