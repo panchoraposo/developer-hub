@@ -11,3 +11,5 @@ data:
         disabled: false
       - package: ./dynamic-plugins/dist/backstage-community-plugin-catalog-backend-module-keycloak-dynamic
         disabled: false
+      - package: ./dynamic-plugins/dist/backstage-community-plugin-rbac
+        disabled: false
