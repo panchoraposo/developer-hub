@@ -15,10 +15,4 @@ data:
         disabled: false
       - package: ./dynamic-plugins/dist/roadiehq-scaffolder-backend-module-utils-dynamic
         disabled: false
-      - package: ./dynamic-plugins/dist/backstage-plugin-scaffolder
-        disabled: false
-      - package: ./dynamic-plugins/dist/backstage-plugin-scaffolder-backend
-        disabled: false
-      - package: ./dynamic-plugins/dist/roadiehq-scaffolder-backend-module-utils-dynamic
-        disabled: false
       
