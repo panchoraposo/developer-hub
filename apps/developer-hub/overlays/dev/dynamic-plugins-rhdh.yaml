@@ -13,3 +13,5 @@ data:
         disabled: false
       - package: ./dynamic-plugins/dist/backstage-community-plugin-rbac
         disabled: false
+      - package: ./dynamic-plugins/dist/roadiehq-scaffolder-backend-module-utils-dynamic
+        disabled: false
