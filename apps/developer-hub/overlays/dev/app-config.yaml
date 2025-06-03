@@ -35,7 +35,7 @@ signInPage: oidc
 catalog:
   locations:
     - type: url
-      target: https://raw.githubusercontent.com/backstage/backstage/refs/heads/master/packages/catalog-model/examples/all-components.yaml
+      target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/components/artist-lookup-component.yaml
   rules:
     - allow: [Component, System, API, Resource, Location, Template, Domain]
   
