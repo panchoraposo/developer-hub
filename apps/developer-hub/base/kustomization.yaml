@@ -1,9 +1,2 @@
 resources:
   - developer-hub-instance.yaml
-
-configMapGenerator:
-  - name: rbac-policy
-    files:
-      - rbac-policy.csv
-    options:
-      disableNameSuffixHash: true

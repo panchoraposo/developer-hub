@@ -3,11 +3,13 @@ resources:
   - dynamic-plugins-rhdh.yaml
   
 configMapGenerator:
+  - name: rbac-policy
+    files:
+      - rbac-policy.csv
+    options:
+      disableNameSuffixHash: true
   - name: developer-hub-config
     files:
       - app-config.yaml
     options:
       disableNameSuffixHash: true
-
-generatorOptions:
-  disableNameSuffixHash: true
