@@ -77,7 +77,7 @@ spec:
           owner: rhdh
           cluster: apps.cluster-brl4w.brl4w.sandbox968.opentlc.com
           host: ${{ parameters.repo.host }}
-          destination: ${{ user.entity.metadata.name }}/${{ parameters.component_id }}
+          destination: rhdh/${{ parameters.component_id }}
           port: 8080
           gitops_namespace: rhdh-gitops
         targetPath: ./${{ user.entity.metadata.name }}-${{parameters.component_id}}
