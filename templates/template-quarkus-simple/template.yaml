@@ -74,7 +74,7 @@ spec:
           group_id: ${{ parameters.group_id }}
           artifact_id: ${{ parameters.artifact_id }}
           java_package_name: ${{ parameters.java_package_name }}
-          owner: ${{ user.entity.metadata.name }}
+          owner: rhdh
           cluster: apps.cluster-brl4w.brl4w.sandbox968.opentlc.com
           host: ${{ parameters.repo.host }}
           destination: ${{ user.entity.metadata.name }}/${{ parameters.component_id }}
