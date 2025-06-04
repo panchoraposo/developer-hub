@@ -71,7 +71,7 @@ permission:
         - name: user:default/pe1
     #         - name: user:default/pe2
     conditionalPoliciesFile: /opt/app-root/src/rbac-conditional-policies.yaml
-    policies-csv-file: /opt/app-root/src/rbac-policies.csv
+    policies-csv-file: /opt/app-root/src/rbac-policy.csv
     policyFileReload: true
 
 scaffolder:
