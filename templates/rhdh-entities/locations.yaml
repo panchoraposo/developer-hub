@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: parasol-entities
+  description: A collection of all entities
+spec:
+  targets:
+    - ./systems/parasol-system.yaml
+    - ./domains/domain-parasol-insurance.yaml

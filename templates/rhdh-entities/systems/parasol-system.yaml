@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: parasol-system
+  description: Parasol Insurance applications
+  tags:
+    - parasol
+    - insurance
+spec:
+  owner: group:default/platform-engineers
+  domain: parasol-insurance

@@ -1,0 +1,171 @@
+openapi: 3.0.2
+info:
+    title: Parasol Catalog API 
+    version: 1.0.0
+    description: Parasol APIs made accessible to global partners to view a catalog of Insurance Products available
+paths:
+    '/services/product/category/{categories}':
+        summary: Get products by category
+        description: Return the list of products that belong to the given categories.
+        get:
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/product'
+                            examples:
+                                self-video-claims:
+                                    value:
+                                        -
+                                            itemId: '329299'
+                                            name: Liability Essential
+                                            category: Self-video claims
+                                            price: 400
+                                            desc: >-
+                                                A foundational insurance product designed to protect you from legal and financial obligations if you''re responsible for causing bodily injury or property damage to a third party in an accident. This policy ensures that you won''t face overwhelming costs from lawsuits, medical bills, or property repairs. It meets the minimum requirements in most states, making it a must-have for responsible drivers. 
+                                        -
+                                            itemId: '329199'
+                                            name: No-Fault Insurance
+                                            category: Self-video claims
+                                            price: 350.00
+                                            desc: >-
+                                                In states where no-fault insurance is required, this product ensures that your medical bills and related expenses are covered by your own insurance, regardless of who is at fault in an accident. This policy is essential for avoiding costly lawsuits and ensuring speedy compensation for medical and rehabilitation costs.
+                                        -
+                                            itemId: '165613'
+                                            name: Uninsured Motorist Protection
+                                            category: Self-video claims
+                                            price: 450
+                                            desc: >-
+                                                Protect yourself from financial losses if you are involved in an accident with an uninsured or underinsured driver. This product covers damages to your vehicle, as well as medical expenses if the other driver doesn''t have sufficient coverage to pay for the accident.
+                    description: Product list found.
+            summary: Get products by category
+        parameters:
+            -
+                name: categories
+                description: Category name
+                schema:
+                    type: string
+                in: path
+                required: true
+    /services/category/list:
+        summary: Get list of categories
+        description: Return the list of categories
+        get:
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/category'
+                            examples:
+                                category-list:
+                                    value:
+                                        -
+                                            id: 1
+                                            category: Self-video claims
+                                        -
+                                            id: 2
+                                            category: Zero-paper claims
+                                        -
+                                            id: 3
+                                            category: On-ground support
+                    description: Get list of categories
+            summary: Get list of categories
+            description: Get list of categories
+components:
+    schemas:
+        category:
+            title: Root Type for category
+            description: Definition of one Category
+            type: object
+            properties:
+                id:
+                    description: Category ID
+                    type: integer
+                category:
+                    description: Category name
+                    type: string
+            example:
+                id: 1
+                category: clothing
+        product:
+            description: Definition of one product in the Parasol Catalogue
+            type: object
+            properties:
+                itemId:
+                    description: Product ID
+                    type: string
+                    example: '329299'
+                name:
+                    description: Product Name
+                    type: string
+                    example: Liability Essential
+                category:
+                    description: Product category
+                    type: string
+                    example: Self-video claims
+                price:
+                    description: Price
+                    type: integer
+                    example: '400'
+                desc:
+                    description: Description
+                    type: string
+                    example: >-
+                        A foundational insurance product designed to protect you from legal and financial obligations if you''re responsible for causing bodily injury or property damage to a third party in an accident. This policy ensures that you won''t face overwhelming costs from lawsuits, medical bills, or property repairs. It meets the minimum requirements in most states, making it a must-have for responsible drivers.
+            example:
+                itemId: '329299'
+                name: Liability Essential
+                category: Self-video claims
+                price: 10
+                desc: >-
+                    A foundational insurance product designed to protect you from legal and financial obligations if you''re responsible for causing bodily injury or property damage to a third party in an accident. This policy ensures that you won''t face overwhelming costs from lawsuits, medical bills, or property repairs. It meets the minimum requirements in most states, making it a must-have for responsible drivers.
+    responses:
+        product-list:
+            content:
+                application/json:
+                    schema:
+                        type: array
+                        items:
+                            $ref: '#/components/schemas/product'
+                    examples:
+                        clothing:
+                            value:
+                                -
+                                    itemId: '329299'
+                                    name: Liability Essential
+                                    category: Self-video claims
+                                    price: 10
+                                    desc: >-
+                                        A foundational insurance product designed to protect you from legal and financial obligations if you''re responsible for causing bodily injury or property damage to a third party in an accident. This policy ensures that you won''t face overwhelming costs from lawsuits, medical bills, or property repairs. It meets the minimum requirements in most states, making it a must-have for responsible drivers.
+                                -
+                                    itemId: '329199'
+                                    name: No-Fault Insurance
+                                    category: Self-video claims
+                                    price: 9
+                                    desc: >-
+                                        In states where no-fault insurance is required, this product ensures that your medical bills and related expenses are covered by your own insurance, regardless of who is at fault in an accident. This policy is essential for avoiding costly lawsuits and ensuring speedy compensation for medical and rehabilitation costs.
+            description: List of products
+        category-list:
+            content:
+                application/json:
+                    schema:
+                        description: Category List
+                        type: array
+                        items:
+                            $ref: '#/components/schemas/category'
+                    examples:
+                        basic:
+                            value:
+                                -
+                                    id: 11
+                                    category: some text
+                                -
+                                    id: 52
+                                    category: some text
+            description: List of categories
