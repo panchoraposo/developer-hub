@@ -3,14 +3,14 @@ kind: Template
 metadata:
   name: quarkus-web-template
   title: Quarkus Service
-  description: Create a simple microservice using Quarkus with Argo CD
+  description: Create a simple microservice using Quarkus
   tags:
     - recommended
     - java
     - quarkus
     - maven
 spec:
-  owner: developers
+  owner: ${{ user.entity.metadata.name }}
   type: service
   parameters:
     - title: Provide Information for Application
@@ -75,8 +75,8 @@ spec:
           artifact_id: ${{ parameters.artifact_id }}
           java_package_name: ${{ parameters.java_package_name }}
           owner: rhdh
-          cluster: gitlab-gitlab.apps.cluster-brl4w.brl4w.sandbox968.opentlc.com
-          host: https://gitlab-gitlab.apps.cluster-brl4w.brl4w.sandbox968.opentlc.com
+          cluster: apps.cluster-brl4w.brl4w.sandbox968.opentlc.com
+          host: ${{ parameters.repo.host }}
           destination: rhdh/${{ parameters.component_id }}
           port: 8080
           gitops_namespace: rhdh-gitops
@@ -86,7 +86,7 @@ spec:
       name: Publish
       action: publish:gitlab
       input:
-        repoUrl: "${{ parameters.repo.host }}?owner=pe1&repo=${{parameters.component_id}}"
+        repoUrl: "${{ parameters.repo.host }}?owner=${{ user.entity.metadata.name }}&repo=${{parameters.component_id}}"
         repoVisibility: public
         defaultBranch: main
         sourcePath: ./${{ user.entity.metadata.name }}-${{parameters.component_id}}
