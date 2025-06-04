@@ -86,7 +86,7 @@ spec:
       name: Publish
       action: publish:gitlab
       input:
-        repoUrl: "${{ parameters.repo.host }}?owner=${{ user.entity.metadata.name }}&repo=${{parameters.component_id}}"
+        repoUrl: "${{ parameters.repo.host }}?owner=rhdh&repo=${{parameters.component_id}}"
         repoVisibility: public
         defaultBranch: main
         sourcePath: ./${{ user.entity.metadata.name }}-${{parameters.component_id}}
