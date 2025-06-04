@@ -70,8 +70,8 @@ permission:
       users:
         - name: user:default/pe1
     #         - name: user:default/pe2
-    #policies-csv-file: ./rbac/rbac-policy.csv
-    #conditionalPoliciesFile: ./rbac/rbac-conditional-policies.yaml
+    #policies-csv-file: /opt/app-root/src/rbac/rbac-policy.csv
+    conditionalPoliciesFile: /opt/app-root/src/rbac/rbac-conditional-policies.yaml
 
 scaffolder:
   enabled: true
