@@ -45,52 +45,6 @@ spec:
           type: string
           description: Help others understand what this website is for.
           default: A cool quarkus app
-    - title: Provide Image Registry Information
-      required:
-        - image_registry
-      properties:
-        image_registry:
-          title: Image Registry
-          type: string
-          enum:
-            - OpenShift
-            - Quay
-      dependencies:
-        image_registry:
-          oneOf:
-            - properties:
-                image_registry:
-                  enum:
-                    - OpenShift
-                image_host:
-                  title: Image Host
-                  type: string
-                  description: Host for storing image
-                  default: image-registry.openshift-image-registry.svc:5000
-                image_tag:
-                  title: Image Tag
-                  default: latest
-                  type: string
-                  description: Build Image tag
-            - properties:
-                image_registry:
-                  enum:
-                    - Quay
-                image_host:
-                  title: Image Host
-                  type: string
-                  description: Host for storing image
-                  default: quay.apps.cluster-pcp7k.pcp7k.sandbox880.opentlc.com
-                image_password:
-                  title: Password
-                  type: string
-                  description: Your Quay password
-                  ui:field: Secret
-                image_tag:
-                  title: Image Tag
-                  default: latest
-                  type: string
-                  description: Build Image tag
     - title: Application repository Information
       required:
         - repo
@@ -103,9 +57,9 @@ spec:
               title: Repo Host
               type: string
               description: Your SCM host
-              default: gitlab-gitlab.apps.cluster-pcp7k.pcp7k.sandbox880.opentlc.com
+              default: gitlab-gitlab.apps.cluster-brl4w.brl4w.sandbox968.opentlc.com
               enum:
-                - gitlab-gitlab.apps.cluster-pcp7k.pcp7k.sandbox880.opentlc.com
+                - gitlab-gitlab.apps.cluster-brl4w.brl4w.sandbox968.opentlc.com
 
   steps:
     - id: template
@@ -143,52 +97,6 @@ spec:
       input:
         repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
         catalogInfoPath: "/catalog-info.yaml"
-
-    - id: template-gitops-deployment
-      name: Generating Deployment Resources
-      action: fetch:template
-      input:
-        url: ./manifests
-        copyWithoutTemplating: []
-        values:
-          component_id: ${{ parameters.component_id }}
-          source_repository_gitops: https://${{ parameters.repo.host }}/${{ user.entity.metadata.name }}/${{parameters.component_id}}-gitops.git
-          source_repository: https://${{ parameters.repo.host }}/${{ user.entity.metadata.name }}/${{parameters.component_id}}.git
-          owner: ${{ user.entity.metadata.name }}
-          namespace: ${{ user.entity.metadata.name }}-${{ parameters.component_id }}-dev
-          image_registry: ${{ parameters.image_registry }}
-          image_host: ${{ parameters.image_host }}
-          image_organization: ${{ user.entity.metadata.name }}
-          image_password: ${{ secrets.image_password }}
-          image_name: ${{ parameters.component_id }}
-          image_tag: ${{ parameters.image_tag }}
-          gitops_namespace: rhdh-gitops
-          gitops_project: default
-          port: 8080
-          cluster_subdomain: apps.cluster-pcp7k.pcp7k.sandbox880.opentlc.com
-          repository_host: ${{ parameters.repo.host }}
-        targetPath: ./${{ user.entity.metadata.name }}-${{parameters.component_id}}-gitops
-
-    - id: publish-gitops
-      name: Publishing to Resource Repository
-      action: publish:gitlab
-      input:
-        repoUrl: "${{ parameters.repo.host }}?owner=${{ user.entity.metadata.name }}&repo=${{parameters.component_id}}-gitops"
-        repoVisibility: public
-        defaultBranch: main
-        title: gitops resources for ${{ parameters.component_id }}
-        description: gitops resources for ${{ parameters.component_id }}
-        sourcePath: ./${{ user.entity.metadata.name }}-${{parameters.component_id}}-gitops
-
-    - id: create-argocd-resources
-      name: Create Argo CD Resources
-      action: argocd:create-resources
-      input:
-        appName: ${{ user.entity.metadata.name }}-${{ parameters.component_id }}-bootstrap
-        argoInstance: main
-        namespace: rhdh-gitops
-        repoUrl: https://${{ parameters.repo.host }}/${{ user.entity.metadata.name }}/${{ parameters.component_id }}-gitops.git
-        path: 'argocd/'
 
   output:
     links:
