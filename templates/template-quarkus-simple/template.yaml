@@ -17,6 +17,7 @@ spec:
       required:
         - component_id
         - java_package_name
+        - owner
       properties:
         component_id:
           title: Name
@@ -43,8 +44,11 @@ spec:
         description:
           title: Description
           type: string
-          description: Help others understand what this website is for.
           default: A cool quarkus app
+        owner:
+          title: Owner
+          type: string
+          default: ${{ user.entity.metadata.name }}
     - title: Application repository Information
       required:
         - repo
@@ -74,13 +78,13 @@ spec:
           group_id: ${{ parameters.group_id }}
           artifact_id: ${{ parameters.artifact_id }}
           java_package_name: ${{ parameters.java_package_name }}
-          owner: rhdh
-          cluster: gitlab-gitlab.apps.cluster-brl4w.brl4w.sandbox968.opentlc.com
-          host: gitlab-gitlab.apps.cluster-brl4w.brl4w.sandbox968.opentlc.com
+          owner: ${{ parameters.owner }}
+          cluster: ${{ parameters.repo.host }}
+          host: ${{ parameters.repo.host }}
           destination: rhdh/${{ parameters.component_id }}
           port: 8080
           gitops_namespace: rhdh-gitops
-        targetPath: ./${{ user.entity.metadata.name }}-${{parameters.component_id}}
+        targetPath: ./${{ parameters.owner }}-${{ parameters.component_id }}
 
     - id: publish
       name: Publish
@@ -89,7 +93,7 @@ spec:
         repoUrl: "${{ parameters.repo.host }}?owner=rhdh&repo=${{parameters.component_id}}"
         repoVisibility: public
         defaultBranch: main
-        sourcePath: ./${{ user.entity.metadata.name }}-${{parameters.component_id}}
+        sourcePath: ./${{ parameters.owner }}-${{ parameters.component_id }}
 
     - id: register
       name: Register
