@@ -143,14 +143,14 @@ postgresql:
   dbName: gitlab_production
 
 cluster:
-  subdomain: 
+  subdomain: apps.cluster-brl4w.brl4w.sandbox968.opentlc.com
 
 gitops:
   namespace:
   project: default
 
-quay:
-  host: 
+#quay:
+#  host: 
 
 vault:
   name: vault
