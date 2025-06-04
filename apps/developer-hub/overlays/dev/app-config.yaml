@@ -82,3 +82,10 @@ scaffolder:
   templaters:
     cookiecutter:
       cookiecutterCommand: cookiecutter
+
+integrations:
+  gitlab:
+    - apiBaseUrl: https://gitlab-gitlab.apps.cluster-brl4w.brl4w.sandbox968.opentlc.com/api/v4
+      baseUrl: https://gitlab-gitlab.apps.cluster-brl4w.brl4w.sandbox968.opentlc.com
+      host: gitlab-gitlab.apps.cluster-brl4w.brl4w.sandbox968.opentlc.com
+      token: ${GITLAB_TOKEN}
