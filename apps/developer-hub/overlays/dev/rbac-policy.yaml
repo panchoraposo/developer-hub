@@ -7,34 +7,34 @@ metadata:
     app.kubernetes.io/name: backstage
 data:
   rbac-conditional-policies.yaml: |
-    ---
-    conditions:
-      not:
-        params:
-          annotation: backstage.io/managed-by
-          value: orchestrator
+    policies:
+      - conditions:
+          not:
+            params:
+              annotation: backstage.io/managed-by
+              value: orchestrator
+            resourceType: catalog-entity
+            rule: HAS_ANNOTATION
+        permissionMapping:
+          - read
+        pluginId: catalog
         resourceType: catalog-entity
-        rule: HAS_ANNOTATION
-    permissionMapping:
-    - read
-    pluginId: catalog
-    resourceType: catalog-entity
-    result: CONDITIONAL
-    roleEntityRef: role:default/location_read_developer
-    ---
-    conditions:
-      params:
-        claims:
-        - $ownerRefs
-      resourceType: catalog-entity
-      rule: IS_ENTITY_OWNER
-    permissionMapping:
-    - delete
-    - update
-    pluginId: catalog
-    resourceType: catalog-entity
-    result: CONDITIONAL
-    roleEntityRef: role:default/developer
+        result: CONDITIONAL
+        roleEntityRef: role:default/location_read_developer
+
+      - conditions:
+          params:
+            claims:
+              - $ownerRefs
+          resourceType: catalog-entity
+          rule: IS_ENTITY_OWNER
+        permissionMapping:
+          - delete
+          - update
+        pluginId: catalog
+        resourceType: catalog-entity
+        result: CONDITIONAL
+        roleEntityRef: role:default/developer
   rbac-policy.csv: |
     p, role:default/location_read, catalog.entity.read, read, allow
     p, role:default/location_read, catalog.location.read, read, allow

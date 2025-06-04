@@ -1,7 +1,7 @@
 resources:
   - ../../base
   - dynamic-plugins-rhdh.yaml
-  #- rbac-policy.yaml
+  - rbac-policy.yaml
 
 configMapGenerator:
   - name: developer-hub-config
@@ -9,10 +9,10 @@ configMapGenerator:
       - app-config.yaml
     options:
       disableNameSuffixHash: true
-  - name: rbac-policy
-    files:
-      - rbac-conditional-policies.yaml
-      - rbac-policy.csv
+  #- name: rbac-policy
+  #  files:
+  #    - rbac-conditional-policies.yaml
+  #    - rbac-policy.csv
 
 generatorOptions:
   disableNameSuffixHash: true
