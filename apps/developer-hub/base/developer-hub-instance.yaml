@@ -9,7 +9,11 @@ spec:
       mountPath: /opt/app-root/src
       configMaps:
          - name: developer-hub-config
-         - name: rbac-policy
+      extraFiles:
+        - name: rbac-policy-volume
+          mountPath: /opt/app-root/src/rbac
+          configMap:
+            name: rbac-policy
     replicas: 1
     route:
       enabled: true
