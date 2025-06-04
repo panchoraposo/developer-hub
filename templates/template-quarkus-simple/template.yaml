@@ -48,7 +48,7 @@ spec:
         owner:
           title: Owner
           type: string
-          default: ${{ user.entity.metadata.name }}
+          default: rhdh
     - title: Application repository Information
       required:
         - repo
