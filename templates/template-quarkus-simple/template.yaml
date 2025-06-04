@@ -10,7 +10,7 @@ metadata:
     - quarkus
     - maven
 spec:
-  owner: rhdh
+  owner: dev1
   type: service
   parameters:
     - title: Provide Information for Application
