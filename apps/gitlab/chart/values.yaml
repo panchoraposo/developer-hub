@@ -58,7 +58,7 @@ gitlab:
               color: green
             - name: denied
               color: red        
-    - name: devteam1
+    - name: developers
       repo: []
       users:
         - id: dev1
@@ -145,16 +145,16 @@ postgresql:
 cluster:
   subdomain: apps.cluster-brl4w.brl4w.sandbox968.opentlc.com
 
-gitops:
-  namespace:
-  project: default
+#gitops:
+#  namespace:
+#  project: default
 
 #quay:
 #  host: 
 
-vault:
-  name: vault
-  namespace: vault
+#vault:
+#  name: vault
+#  namespace: vault
 
 orchestrator:
   namespace: orchestrator
