@@ -9,10 +9,6 @@ configMapGenerator:
       - app-config.yaml
     options:
       disableNameSuffixHash: true
-  #- name: rbac-policy
-  #  files:
-  #    - rbac-conditional-policies.yaml
-  #    - rbac-policy.csv
 
 generatorOptions:
   disableNameSuffixHash: true

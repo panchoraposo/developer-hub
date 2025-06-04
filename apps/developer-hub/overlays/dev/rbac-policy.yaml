@@ -1,7 +1,7 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: rbac-policy
+  name: rbac-policies
   namespace: backstage
   labels:
     app.kubernetes.io/name: backstage
