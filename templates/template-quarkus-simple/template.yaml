@@ -75,7 +75,7 @@ spec:
           artifact_id: ${{ parameters.artifact_id }}
           java_package_name: ${{ parameters.java_package_name }}
           owner: rhdh
-          cluster: apps.cluster-brl4w.brl4w.sandbox968.opentlc.com
+          cluster: gitlab-gitlab.apps.cluster-brl4w.brl4w.sandbox968.opentlc.com
           host: gitlab-gitlab.apps.cluster-brl4w.brl4w.sandbox968.opentlc.com
           destination: rhdh/${{ parameters.component_id }}
           port: 8080
