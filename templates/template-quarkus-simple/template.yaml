@@ -61,9 +61,9 @@ spec:
               title: Repo Host
               type: string
               description: Your SCM host
-              default: gitlab-gitlab.apps.cluster-brl4w.brl4w.sandbox968.opentlc.com
+              default: gitlab-gitlab.apps.cluster-774c7.774c7.sandbox1555.opentlc.com
               enum:
-                - gitlab-gitlab.apps.cluster-brl4w.brl4w.sandbox968.opentlc.com
+                - gitlab-gitlab.apps.cluster-774c7.774c7.sandbox1555.opentlc.com
 
   steps:
     - id: template
