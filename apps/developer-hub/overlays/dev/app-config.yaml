@@ -87,5 +87,5 @@ integrations:
   gitlab:
     - apiBaseUrl: https://gitlab-gitlab.${OPENSHIFT_CLUSTER_INGRESS_DOMAIN}/api/v4
       baseUrl: https://gitlab-gitlab.${OPENSHIFT_CLUSTER_INGRESS_DOMAIN}
-      host: ${OPENSHIFT_CLUSTER_INGRESS_DOMAIN}
+      host: gitlab-gitlab.${OPENSHIFT_CLUSTER_INGRESS_DOMAIN}
       token: ${GITLAB_TOKEN}
