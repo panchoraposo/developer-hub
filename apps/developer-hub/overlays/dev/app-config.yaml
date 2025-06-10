@@ -85,7 +85,7 @@ scaffolder:
 
 integrations:
   gitlab:
-    - apiBaseUrl: https://gitlab-gitlab.apps.cluster-774c7.774c7.sandbox1555.opentlc.com/api/v4
-      baseUrl: https://gitlab-gitlab.apps.cluster-774c7.774c7.sandbox1555.opentlc.com
-      host: gitlab-gitlab.apps.cluster-774c7.774c7.sandbox1555.opentlc.com
+    - apiBaseUrl: https://gitlab-gitlab.${OPENSHIFT_CLUSTER_INGRESS_DOMAIN}/api/v4
+      baseUrl: https://gitlab-gitlab.${OPENSHIFT_CLUSTER_INGRESS_DOMAIN}
+      host: ${OPENSHIFT_CLUSTER_INGRESS_DOMAIN}
       token: ${GITLAB_TOKEN}
