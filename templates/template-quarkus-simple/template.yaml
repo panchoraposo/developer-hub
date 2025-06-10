@@ -90,16 +90,11 @@ spec:
       name: Publish
       action: publish:gitlab
       input:
-        repoUrl: "${{ parameters.repo.host }}?owner=${{ parameters.owner }}&repo=${{parameters.component_id}}"
+        repoUrl: "${{ parameters.repo.host }}?owner=${{ parameters.owner }}&repo=${{ parameters.component_id }}"
         repoVisibility: public
         defaultBranch: main
         sourcePath: ./${{ parameters.owner }}-${{ parameters.component_id }}
-        createCommit: true
-        commitMessage: "Initial commit from Developer Hub"
-        author:
-          name: "Developer Hub"
-          email: "developer.hub@example.com"
-
+        
     - id: register
       name: Register
       action: catalog:register
