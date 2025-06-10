@@ -1,0 +1,20 @@
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: webhook-{{ include "quarkus-build.name" . }}-el
+  labels:
+    app.kubernetes.io/managed-by: EventListener
+    app.kubernetes.io/part-of: Triggers
+    eventlistener: {{ include "quarkus-build.name" . }}-el
+    {{- include "quarkus-build.labels" . | nindent 4 }}
+spec:
+  to:
+    kind: Service
+    name: el-{{ include "quarkus-build.name" . }}-el
+    weight: 100
+  port:
+    targetPort: http-listener
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: edge

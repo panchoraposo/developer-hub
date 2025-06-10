@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "quarkus-build.name" . }}-trigger-pipeline
+  labels:
+    {{- include "quarkus-build.labels" . | nindent 4 }}
+data:
+  trigger-pipeline.yaml: |
+    apiVersion: tekton.dev/v1
+    kind: PipelineRun
+    metadata:
+      generateName: {{ include "quarkus-build.name" . }}-build-
+      labels:
+        {{- include "quarkus-build.labels" . | nindent 8 }}
+        backstage.io/kubernetes-id: {{ include "quarkus-build.name" . }}
+    spec:
+      params:
+        - name: source-repo
+          value: {{ .Values.git.repo }}
+        - name: source-branch
+          value: {{ .Values.git.branch }}
+        - name: output-image
+          value: {{ include "image.dev-url" . }}
+        - name: component-id
+          value: {{ include "quarkus-build.name" . }}
+      pipelineRef:
+        name: {{ include "quarkus-build.name" . }}-build
+      taskRunTemplate:
+        serviceAccountName: pipeline
+      timeouts:
+        pipeline: 1h0m0s
+      workspaces:
+        - name: source-folder
+          volumeClaimTemplate:
+            spec:
+              accessModes:
+                - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 1Gi
+        - emptyDir: {}
+          name: maven-settings
+{{- if eq .Values.image.registry "Quay" }}
+        - name: docker-config
+          secret:
+            secretName: {{ include "quarkus-build.name" . }}-registry-creds
+{{- else }}
+        - name: docker-config
+          emptyDir: {}
+{{- end }}

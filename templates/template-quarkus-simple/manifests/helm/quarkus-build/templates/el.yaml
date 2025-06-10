@@ -1,0 +1,25 @@
+---
+apiVersion: triggers.tekton.dev/v1beta1
+kind: EventListener
+metadata:
+  name: {{ include "quarkus-build.name" . }}-el
+  labels:
+    {{- include "quarkus-build.labels" . | nindent 4 }}
+spec:
+  serviceAccountName: pipeline
+  triggers:
+    - bindings:
+        - kind: TriggerBinding
+          ref: {{ include "quarkus-build.name" . }}-commit-binding
+      interceptors:
+        - params:
+            - name: filter
+              value: has(body.commits) && body.object_kind == 'push'
+            - name: overlays
+              value: null
+          ref:
+            kind: ClusterInterceptor
+            name: cel
+      name: commit-trigger
+      template:
+        ref: {{ include "quarkus-build.name" . }}-build

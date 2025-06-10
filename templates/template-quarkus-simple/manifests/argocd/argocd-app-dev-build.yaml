@@ -1,0 +1,53 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ${{ values.owner }}-${{ values.component_id }}-dev-build
+  namespace: ${{ values.gitops_namespace }}
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io/foreground
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  project: ${{ values.gitops_project }}
+  source:
+    repoURL: ${{ values.source_repository_gitops }}
+    targetRevision: HEAD
+    path: ./helm/quarkus-build
+    helm:
+      values: |
+        nameOverride: ${{ values.component_id }}
+        owner: ${{ values.owner }}
+        git:
+          host: ${{ values.repository_host }}
+          repo: ${{ values.source_repository }}
+        image:
+          registry: ${{values.image_registry}}
+          organization: ${{values.image_organization}}
+          password: ${{values.image_password}}
+          host: ${{ values.image_host }}
+          name: ${{ values.image_name }}
+          namespace: ${{ values.namespace }}
+          tag: ${{ values.image_tag }}
+        cluster:
+          subdomain: ${{ values.cluster_subdomain }}
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: ${{ values.namespace }}
+  ignoreDifferences:
+    - group: '*'
+      jqPathExpressions:
+        - '.imagePullSecrets[] | select(.name|test(".-dockercfg-."))'
+      kind: ServiceAccount
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+    retry:
+      backoff:
+        duration: 5s # the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
+        factor: 2 # a factor to multiply the base duration after each failed retry
+        maxDuration: 10m # the maximum amount of time allowed for the backoff strategy

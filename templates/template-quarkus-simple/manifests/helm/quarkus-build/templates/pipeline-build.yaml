@@ -1,0 +1,101 @@
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata:
+  name: {{ include "quarkus-build.name" . }}-build
+  labels:
+    {{- include "quarkus-build.labels" . | nindent 4 }}
+spec:
+  params:
+    - name: source-repo
+      description: source repo that contains the application code
+      type: string
+      default: {{ .Values.git.repo }}
+    - name: source-branch
+      description: source branch to build from
+      default: {{ .Values.git.branch }}
+      type: string
+    - name: dockerfile
+      type: string
+      default: {{ .Values.image.dockerfile }}
+    - name: output-image
+      type: string
+      default: {{ include "image.dev-url" . }}
+  tasks:
+    - name: git-clone
+      params:
+        - name: URL
+          value: $(params.source-repo)
+        - name: REVISION
+          value: $(params.source-branch)
+      taskRef:
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: git-clone
+          - name: namespace
+            value: openshift-pipelines 
+      workspaces:
+        - name: output
+          workspace: source-folder
+    - name: build-source
+      runAfter:
+        - git-clone
+      params:
+        - name: GOALS
+          value:
+            - package
+      taskRef:
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: maven
+          - name: namespace
+            value: openshift-pipelines
+      workspaces:
+        - name: source
+          workspace: source-folder
+        - name: maven_settings
+          workspace: maven-settings
+    - name: build-and-push-image
+      runAfter:
+        - build-source
+      params:
+        - name: DOCKERFILE
+          value: $(params.dockerfile)
+        - name: IMAGE
+          value: $(params.output-image)
+{{- if not (eq .Values.image.registry "Quay") }}
+        - name: TLSVERIFY
+          value: 'false'
+{{- end }}
+      taskRef:
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: buildah
+          - name: namespace
+            value: {{ .Release.Namespace }}
+      workspaces:
+        - name: source
+          workspace: source-folder
+    - name: resync
+      runAfter:
+        - build-and-push-image
+      taskRef:
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: resync
+          - name: namespace
+            value: {{ .Release.Namespace }}
+  workspaces:
+    - name: source-folder
+    - name: maven-settings
