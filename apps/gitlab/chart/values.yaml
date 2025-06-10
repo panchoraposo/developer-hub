@@ -143,7 +143,7 @@ postgresql:
   dbName: gitlab_production
 
 cluster:
-  subdomain: apps.cluster-774c7.774c7.sandbox1555.opentlc.com
+  subdomain: aapps.cluster-9n4vk.9n4vk.sandbox235.opentlc.com
 
 #gitops:
 #  namespace:
