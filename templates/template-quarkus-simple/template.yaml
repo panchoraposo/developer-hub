@@ -88,7 +88,7 @@ spec:
 
     - id: prepare-git
       name: Prepare Git Repository
-      action: shell:script
+      action: roadiehq:script
       input:
         workingDirectory: ./${{ parameters.owner }}-${{ parameters.component_id }}
         script: |
