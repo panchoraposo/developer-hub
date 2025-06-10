@@ -86,6 +86,18 @@ spec:
           gitops_namespace: rhdh-gitops
         targetPath: ./${{ parameters.owner }}-${{ parameters.component_id }}
 
+    - id: prepare-git
+      name: Prepare Git Repository
+      action: shell:script
+      input:
+        workingDirectory: ./${{ parameters.owner }}-${{ parameters.component_id }}
+        script: |
+          git init
+          git config user.email "scaffolder@example.com"
+          git config user.name "Backstage Scaffolder"
+          git add .
+          git commit -m "Initial commit"
+
     - id: publish
       name: Publish
       action: publish:gitlab
