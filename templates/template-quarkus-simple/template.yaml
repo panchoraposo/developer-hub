@@ -90,9 +90,7 @@ spec:
       name: Publish
       action: publish:gitlab
       input:
-        repoUrl: "${{ parameters.repo.host }}"
-        owner: ${{ parameters.owner }}
-        repo: ${{ parameters.component_id }}
+        repoUrl: "${{ parameters.repo.host }}?owner=${{ parameters.owner }}&repo=${{parameters.component_id}}"
         repoVisibility: public
         defaultBranch: main
         sourcePath: ./${{ parameters.owner }}-${{ parameters.component_id }}
