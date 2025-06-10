@@ -19,4 +19,4 @@ spec:
   http:
     tlsSecret: rhbk-tls-secret
   hostname:
-    hostname: keycloak.apps.cluster-774c7.774c7.sandbox1555.opentlc.com
+    hostname: keycloak.apps.cluster-9n4vk.9n4vk.sandbox235.opentlc.com
