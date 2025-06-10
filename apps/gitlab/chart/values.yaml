@@ -15,7 +15,7 @@ gitlab:
     host:
     port: "22"
   rootPassword:
-  host:
+  host: "ssh.gitlab-gitlab.apps.cluster-774c7.774c7.sandbox1555.opentlc.co"
   https: "true"
   rootEmail: "root@rhdemo.com"
   keyBase:
