@@ -46,7 +46,7 @@ catalog:
         baseUrl: https://keycloak.${OPENSHIFT_CLUSTER_INGRESS_DOMAIN}
         loginRealm: backstage
         realm: backstage
-        clientId: ${OAUTH_CLIENT_ID}
+        clientId: backstage
         clientSecret: ${OAUTH_CLIENT_SECRET}
         schedule:
           frequency: { minutes: 2 }
