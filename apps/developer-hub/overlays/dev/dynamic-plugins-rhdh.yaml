@@ -21,4 +21,7 @@ data:
         disabled: false
       - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab
         disabled: false
-      
+      - package: ./dynamic-plugins/dist/backstage-community-plugin-jenkins
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-community-plugin-jenkins-backend-dynamic
+        disabled: false
