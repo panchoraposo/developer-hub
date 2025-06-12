@@ -15,7 +15,7 @@ gitlab:
     host:
     port: "22"
   rootPassword:
-  host: "gitlab-gitlab.apps.cluster-9n4vk.9n4vk.sandbox235.opentlc.com"
+  host: "gitlab-gitlab.apps.cluster-2xg4r.2xg4r.sandbox2806.opentlc.com"
   https: "true"
   rootEmail: "root@rhdemo.com"
   keyBase:
@@ -143,7 +143,7 @@ postgresql:
   dbName: gitlab_production
 
 cluster:
-  subdomain: aapps.cluster-9n4vk.9n4vk.sandbox235.opentlc.com
+  subdomain: apps.cluster-2xg4r.2xg4r.sandbox2806.opentlc.com
 
 #gitops:
 #  namespace:
