@@ -1,0 +1,135 @@
+{{- if .Values.deployment }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"jenkins:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"jenkins\")].image"}]'
+  name: {{ .Values.appName }}
+  labels:
+    app: {{ .Values.appName }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ .Values.appName }}
+  strategy: {{- if .Values.persistence }}
+    type: Recreate
+    {{ else }}
+    type: RollingUpdate
+    {{- end }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ .Values.appName }}
+    spec:
+      containers:
+      - name: {{ .Values.appName }}
+        env: {{ if .Values.deployment.openshiftauth }}
+        - name: OPENSHIFT_ENABLE_OAUTH
+          value: "true"
+        - name: OPENSHIFT_ENABLE_REDIRECT_PROMPT
+          value: "true"
+          {{- end }}
+        - name: KUBERNETES_MASTER
+          value: https://kubernetes.default:443
+        - name: KUBERNETES_TRUST_CERTIFICATES
+          value: "true"
+        - name: JENKINS_SERVICE_NAME
+          value: {{ .Values.appName }}
+        - name: JNLP_SERVICE_NAME
+          value: {{ .Values.appName }}-jnlp
+        - name: JVM_ARCH
+          value: 'x86_64'
+        - name: DISABLE_ADMINISTRATIVE_MONITORS
+          value: 'false'
+        - name: ENABLE_FATAL_ERROR_LOG_FILE
+          value: 'false'
+        - name: JENKINS_OPTS
+          value: '--sessionTimeout=180'
+        - name: GITLAB_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: git-auth
+              key: password
+        {{- if .Values.configAsCode }}
+        - name: CASC_JENKINS_CONFIG
+          value: /var/lib/jenkins/config-as-code
+        {{- end }}
+        {{- range $key := .Values.deployment.env_vars }}
+        {{- if .value }}
+        - name: {{ .name }}
+          value: {{ .value | default "" | quote }}
+        {{- end }}
+        {{- end }}
+        image: ' '
+        {{- if .Values.persistence }}
+        imagePullPolicy: Always
+        {{- else }}
+        imagePullPolicy: IfNotPresent
+        {{- end }}
+        livenessProbe:
+          failureThreshold: 2
+          httpGet:
+            path: /login
+            port: 8080
+          initialDelaySeconds: 420
+          periodSeconds: 360
+          timeoutSeconds: 240
+        readinessProbe:
+          httpGet:
+            path: /login
+            port: 8080
+          initialDelaySeconds: 3
+          timeoutSeconds: 240
+        resources:
+          requests:
+            cpu: {{ .Values.deployment.limits.cpu_request | quote }}
+            memory: {{ .Values.deployment.limits.memory_request | quote }}
+          limits:
+            cpu: {{ .Values.deployment.limits.cpu_limit | quote }}
+            memory: {{ .Values.deployment.limits.memory_limit | quote }}
+        securityContext:
+          capabilities: {}
+          privileged: false
+        terminationMessagePath: /dev/termination-log
+        {{- if or (.Values.persistence) (.Values.configAsCode) }}
+        volumeMounts:
+        {{- end }}
+        {{- if .Values.persistence }}
+        - mountPath: /var/lib/jenkins
+          name: {{ .Values.appName }}-data
+        {{- end }}
+        {{- if .Values.configAsCode }}
+        - mountPath: /var/lib/jenkins/config-as-code
+          name: config-as-code
+        {{- end }}
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      serviceAccountName: {{ .Values.appName }}
+      {{- if or (.Values.persistence) (.Values.configAsCode) }}
+      volumes:
+      {{- end }}
+      {{- if .Values.persistence }}
+      - name: {{ .Values.appName }}-data
+        persistentVolumeClaim:
+          claimName: {{ .Values.appName }}
+      {{- end }}
+      {{- if .Values.configAsCode }}
+      - name: config-as-code
+        configMap:
+          name: {{ .Values.configAsCode.configMap }}
+          defaultMode: 420
+      {{- end }}
+  triggers:
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - {{ .Values.appName }}
+      from:
+        kind: ImageStreamTag
+        name: {{ .Values.deployment.imagestream.name}}:{{ .Values.deployment.imagestream.tag}}
+      lastTriggeredImage: ""
+    type: ImageChange
+  - type: ConfigChange
+{{ end }}
