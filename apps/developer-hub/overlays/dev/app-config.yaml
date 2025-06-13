@@ -91,6 +91,8 @@ integrations:
       token: ${GITLAB_TOKEN}
 
 jenkins:
-  baseUrl: https://jenkins-jenkins.apps.cluster-2xg4r.2xg4r.sandbox2806.opentlc.com
-  username: kube:admin
-  apiKey: 1129d6e04d3955e7e51d37dcc63bd3393b
+  instances:
+    - name: default
+      baseUrl: https://jenkins-jenkins.apps.cluster-2xg4r.2xg4r.sandbox2806.opentlc.com
+      username: kube:admin
+      apiKey: 1129d6e04d3955e7e51d37dcc63bd3393b
