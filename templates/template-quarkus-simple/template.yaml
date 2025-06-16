@@ -61,9 +61,9 @@ spec:
               title: Repo Host
               type: string
               description: Your SCM host
-              default: ${{ parameters.repo.host }}
+              default: gitlab-gitlab.apps.cluster-tb8sp.tb8sp.sandbox1673.opentlc.com
               enum:
-                - ${{ parameters.repo.host }}
+                - gitlab-gitlab.apps.cluster-tb8sp.tb8sp.sandbox1673.opentlc.com
 
   steps:
     - id: template
