@@ -85,14 +85,14 @@ scaffolder:
 
 integrations:
   gitlab:
-    - apiBaseUrl: https://gitlab-gitlab.apps.cluster-2xg4r.2xg4r.sandbox2806.opentlc.com/api/v4
-      baseUrl: https://gitlab-gitlab.apps.cluster-2xg4r.2xg4r.sandbox2806.opentlc.com
-      host: gitlab-gitlab.apps.cluster-2xg4r.2xg4r.sandbox2806.opentlc.com
+    - apiBaseUrl: https://gitlab-gitlab.apps.cluster-tb8sp.tb8sp.sandbox1673.opentlc.com/api/v4
+      baseUrl: https://gitlab-gitlab.apps.cluster-tb8sp.tb8sp.sandbox1673.opentlc.com
+      host: gitlab-gitlab.apps.cluster-tb8sp.tb8sp.sandbox1673.opentlc.com
       token: ${GITLAB_TOKEN}
 
 jenkins:
   instances:
     - name: default
-      baseUrl: https://jenkins-jenkins.apps.cluster-2xg4r.2xg4r.sandbox2806.opentlc.com
+      baseUrl: https://jenkins-jenkins.apps.cluster-tb8sp.tb8sp.sandbox1673.opentlc.com
       username: kube:admin
       apiKey: 1129d6e04d3955e7e51d37dcc63bd3393b
