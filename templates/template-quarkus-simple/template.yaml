@@ -9,8 +9,6 @@ metadata:
     - java
     - quarkus
     - maven
-  annotations:
-    jenkins.io/job-full-name: '${{ parameters.owner }}/${{ parameters.component_id }}'
 spec:
   owner: developers
   type: service
@@ -90,25 +88,6 @@ spec:
           port: 8080
           gitops_namespace: rhdh-gitops
         targetPath: ./${{ parameters.owner }}-${{ parameters.component_id }}
-    
-    - id: create-jenkins-job
-      name: Crear job en Jenkins
-      action: jenkins:createJob
-      input:
-        jobName: ${{ parameters.component_id }}
-        jenkinsInstance: default
-        configXml: |
-          <project>
-            <actions/>
-            <description>Job generado desde Backstage para ${{ parameters.component_id }}</description>
-            <builders>
-              <hudson.tasks.Shell>
-                <command>echo "Construyendo el proyecto Quarkus..."</command>
-              </hudson.tasks.Shell>
-            </builders>
-            <triggers/>
-            <disabled>false</disabled>
-          </project>
 
     - id: publish
       name: Publish
