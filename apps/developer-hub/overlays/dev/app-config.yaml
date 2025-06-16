@@ -95,4 +95,4 @@ jenkins:
     - name: default
       baseUrl: https://jenkins-jenkins.apps.cluster-tb8sp.tb8sp.sandbox1673.opentlc.com
       username: kube:admin
-      apiKey: 1129d6e04d3955e7e51d37dcc63bd3393b
+      apiKey: 1164ae195198dd70d3c0ba67eace2d1b42
