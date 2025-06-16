@@ -49,9 +49,6 @@ spec:
           title: Owner
           type: string
           default: rhdh
-        jenkinsJobName:
-          type: string
-          title: ${{ parameters.component_id }}
     - title: Application repository Information
       required:
         - repo
@@ -64,9 +61,9 @@ spec:
               title: Repo Host
               type: string
               description: Your SCM host
-              default: gitlab-gitlab.apps.cluster-tb8sp.tb8sp.sandbox1673.opentlc.com
+              default: ${{ parameters.repo.host }}
               enum:
-                - gitlab-gitlab.apps.cluster-tb8sp.tb8sp.sandbox1673.opentlc.com
+                - ${{ parameters.repo.host }}
 
   steps:
     - id: template
