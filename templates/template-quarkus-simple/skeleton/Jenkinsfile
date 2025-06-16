@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'maven-3.9.5'
+        jdk 'jdk-21'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git url: '${{ parameters.repo.host }}?owner=${{ parameters.owner }}&repo=${{ parameters.component_id }}', branch: 'main'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+    }
+
+    post {
+        always {
+            junit '**/target/surefire-reports/*.xml'
+        }
+    }
+}
