@@ -94,5 +94,5 @@ jenkins:
   instances:
     - name: default
       baseUrl: https://jenkins-jenkins.${OPENSHIFT_CLUSTER_INGRESS_DOMAIN}
-      username: kube:admin
+      username: ${JENKINS_USER}
       apiKey: ${JENKINS_TOKEN}
