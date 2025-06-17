@@ -19,4 +19,4 @@ spec:
   http:
     tlsSecret: rhbk-tls-secret
   hostname:
-    hostname: keycloak.apps.cluster-tb8sp.tb8sp.sandbox1673.opentlc.com
+    hostname: keycloak."{{ OPENSHIFT_CLUSTER_INGRESS_DOMAIN }}"
