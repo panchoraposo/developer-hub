@@ -2,5 +2,5 @@ apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
   name: devspaces-operatorgroup
-  namespace: dev-spaces
+  namespace: devspaces
 spec: {}
