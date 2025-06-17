@@ -2,5 +2,5 @@ apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
   name: devspaces-operatorgroup
-  namespace: openshift-devspaces
+  namespace: devspaces
 spec: {}
