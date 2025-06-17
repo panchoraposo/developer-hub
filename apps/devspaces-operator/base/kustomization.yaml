@@ -1,5 +1,5 @@
 resources:
-  - namespace.yaml
-  - rolebinding.yaml 
+  #- namespace.yaml
+  #- rolebinding.yaml 
   - operator-group.yaml
   - subscription.yaml
