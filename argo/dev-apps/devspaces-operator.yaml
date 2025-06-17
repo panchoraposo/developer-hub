@@ -11,7 +11,7 @@ spec:
     path: apps/devspaces-operator/overlays/dev
   destination:
     server: https://kubernetes.default.svc
-    namespace: devspaces
+    namespace: dev-spaces
   syncPolicy:
     automated:
       prune: true
