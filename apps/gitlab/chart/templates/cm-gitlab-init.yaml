@@ -102,7 +102,11 @@ data:
               public_email: user{{ "{{" }} item {{ "}}" }}@opentlc.com
               skip_confirmation: true
               username: user{{ "{{" }} item {{ "}}" }}
+              {{- if and $.Values.gitlab.users $.Values.gitlab.users.password }}
               password: {{ $.Values.gitlab.users.password }}
+              {{- else }}
+              password: "changeme"
+              {{- end }}
               name: User{{ "{{" }} item {{ "}}" }} GitLab
             headers:
               PRIVATE-TOKEN: '{{ "{{" }} root_token {{ "}}" }}'
