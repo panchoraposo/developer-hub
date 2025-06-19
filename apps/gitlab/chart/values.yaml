@@ -1,0 +1,38 @@
+gitlab:
+  image: quay.io/redhat-gpte/gitlab:17.4.1
+
+  host: "gitlab-gitlab.apps.cluster-nttzr.nttzr.sandbox2812.opentlc.com"
+  https: "true"
+
+  email:
+    address: "gitlab@apps.cluster-nttzr.nttzr.sandbox2812.opentlc.com"
+    displayName: "GitLab Admin"
+    replyTo: "noreply@apps.cluster-nttzr.nttzr.sandbox2812.opentlc.com"
+  rootEmail: "root@apps.cluster-nttzr.nttzr.sandbox2812.opentlc.com"
+
+  rootPassword: ""
+
+  #oidc:
+  #  enabled: true
+  #  clientId: gitlab
+  #  clientSecret: ""
+  #  issuer: "https://keycloak.apps.cluster-nttzr.nttzr.sandbox2812.opentlc.com/realms/backstage"
+  #  redirectUri: "https://gitlab-gitlab.apps.cluster-nttzr.nttzr.sandbox2812.opentlc.com/users/auth/openid_connect/callback"
+  #  scope: "openid profile email groups"
+  #  userIdAttribute: "preferred_username"
+  #  userNameAttribute: "name"
+  #  groupsAttribute: "groups"
+
+  groups:
+    - name: rhdh
+
+postgresql:
+  dbUser: gitlab
+  dbPassword: passw0rd
+  dbName: gitlab_production
+
+cluster:
+  subdomain: "apps.cluster-nttzr.nttzr.sandbox2812.opentlc.com"
+
+orchestrator:
+  namespace: orchestrator
