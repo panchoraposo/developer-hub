@@ -40,6 +40,9 @@ gitlab:
   #  userNameAttribute: "name"
   #  groupsAttribute: "groups"
 
+  users:
+    count: 0
+    
   groups:
     - name: rhdh
 
