@@ -19,4 +19,4 @@ spec:
   http:
     tlsSecret: rhbk-tls-secret
   hostname:
-    hostname: "{{ KEYCLOAK_HOSTNAME }}"
+    hostname: keycloak.apps.cluster-nttzr.nttzr.sandbox2812.opentlc.com
