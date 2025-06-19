@@ -1,0 +1,38 @@
+gitlab:
+  image: quay.io/redhat-gpte/gitlab:17.4.1
+
+  host: "{{ gitlab_hostname }}"
+  https: "true"
+
+  email:
+    address: "gitlab@{{ openshift_base_domain }}"
+    displayName: "GitLab Admin"
+    replyTo: "noreply@{{ openshift_base_domain }}"
+  rootEmail: "root@{{ openshift_base_domain }}"
+
+  rootPassword: ""
+
+  #oidc:
+  #  enabled: true
+  #  clientId: gitlab
+  #  clientSecret: ""
+  #  issuer: "https://{{ keycloak_hostname }}/realms/backstage"
+  #  redirectUri: "https://{{ gitlab_hostname }}/users/auth/openid_connect/callback"
+  #  scope: "openid profile email groups"
+  #  userIdAttribute: "preferred_username"
+  #  userNameAttribute: "name"
+  #  groupsAttribute: "groups"
+
+  groups:
+    - name: rhdh
+
+postgresql:
+  dbUser: gitlab
+  dbPassword: passw0rd
+  dbName: gitlab_production
+
+cluster:
+  subdomain: "{{ openshift_base_domain }}"
+
+orchestrator:
+  namespace: orchestrator
