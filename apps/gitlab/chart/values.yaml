@@ -21,6 +21,14 @@ gitlab:
     host:
     port: "22"
 
+  smtp:
+    enabled: "false"
+    domain: "rhdemo.com"
+    host:
+    port: "587"
+    user: "gitlab"
+    password: "gitlab"
+
   #oidc:
   #  enabled: true
   #  clientId: gitlab
