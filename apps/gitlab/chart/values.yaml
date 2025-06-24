@@ -29,16 +29,16 @@ gitlab:
     user: "gitlab"
     password: "gitlab"
 
-  #oidc:
-  #  enabled: true
-  #  clientId: gitlab
-  #  clientSecret: ""
-  #  issuer: "https://keycloak.apps.cluster-dgtnv.dgtnv.sandbox593.opentlc.com/realms/backstage"
-  #  redirectUri: "https://gitlab-gitlab.apps.cluster-dgtnv.dgtnv.sandbox593.opentlc.com/users/auth/openid_connect/callback"
-  #  scope: "openid profile email groups"
-  #  userIdAttribute: "preferred_username"
-  #  userNameAttribute: "name"
-  #  groupsAttribute: "groups"
+  oidc:
+    enabled: true
+    clientId: gitlab
+    clientSecret: "pyyp7yThOFuYSdyNr3mQfPPK9kKOPXG9"
+    issuer: "https://keycloak.apps.cluster-dgtnv.dgtnv.sandbox593.opentlc.com/realms/backstage"
+    redirectUri: "https://gitlab-gitlab.apps.cluster-dgtnv.dgtnv.sandbox593.opentlc.com/users/auth/openid_connect/callback"
+    scope: "openid profile email groups"
+    userIdAttribute: "preferred_username"
+    userNameAttribute: "name"
+    groupsAttribute: "groups"
 
   users:
     count: 0
