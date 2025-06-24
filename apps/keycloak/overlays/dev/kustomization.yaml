@@ -1,3 +1,9 @@
 resources:
   - ../../base
   - keycloak-instance.yaml
+
+patches:
+  - path: hostname-patch.yaml
+    target:
+      kind: Keycloak
+      name: keycloak
