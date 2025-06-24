@@ -29,20 +29,30 @@ gitlab:
     user: "gitlab"
     password: "gitlab"
 
-  oidc:
+  omniauth:
     enabled: true
-    clientId: gitlab
-    clientSecret: "pyyp7yThOFuYSdyNr3mQfPPK9kKOPXG9"
-    issuer: "https://keycloak.apps.cluster-dgtnv.dgtnv.sandbox593.opentlc.com/realms/backstage"
-    redirect_uri: "https://gitlab-gitlab.apps.cluster-dgtnv.dgtnv.sandbox593.opentlc.com/users/auth/openid_connect/callback"
-    scope: "openid profile email groups"
-    userIdAttribute: "preferred_username"
-    userNameAttribute: "name"
-    groupsAttribute: "groups"
+    autoSignInWithProvider: "openid_connect"
+    allowSingleSignOn: ["openid_connect"]
+    blockAutoCreatedUsers: false
+    externalProviders: ["openid_connect"]
+    providers:
+      - name: "openid_connect"
+        label: "Keycloak"
+        args:
+          name: "openid_connect"
+          scope: ["openid", "profile", "email", "groups"]
+          response_type: "code"
+          issuer: "https://keycloak.apps.cluster-dgtnv.dgtnv.sandbox593.opentlc.com/realms/backstage"
+          discovery: true
+          client_auth_method: "query"
+          uid_field: "preferred_username"
+          client_id: "gitlab"
+          client_secret: "pyyp7yThOFuYSdyNr3mQfPPK9kKOPXG9"
+          redirect_uri: "https://gitlab-gitlab.apps.cluster-dgtnv.dgtnv.sandbox593.opentlc.com/users/auth/openid_connect/callback"
 
   users:
     count: 0
-    
+
   groups:
     - name: rhdh
 
