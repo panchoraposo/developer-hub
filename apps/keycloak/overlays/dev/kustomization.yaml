@@ -1,6 +1,3 @@
 resources:
   - ../../base
   - keycloak-instance.yaml
-
-patchesStrategicMerge:
-  - hostname-patch.yaml
