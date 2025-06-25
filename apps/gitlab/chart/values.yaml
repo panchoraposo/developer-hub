@@ -47,7 +47,8 @@ gitlab:
           client_auth_method: "query"
           uid_field: "preferred_username"
           client_id: "gitlab"
-          client_secret: "pyyp7yThOFuYSdyNr3mQfPPK9kKOPXG9"
+          secret: gitlab-client-secret
+          key: clientSecret
           redirect_uri: "https://gitlab-gitlab.apps.cluster-dgtnv.dgtnv.sandbox593.opentlc.com/users/auth/openid_connect/callback"
 
   users:
