@@ -46,10 +46,10 @@ gitlab:
           discovery: true
           client_auth_method: "query"
           uid_field: "preferred_username"
-          client_id: "gitlab"
-          secret: gitlab-client-secret
-          key: clientSecret
-          redirect_uri: "https://gitlab-gitlab.apps.cluster-dgtnv.dgtnv.sandbox593.opentlc.com/users/auth/openid_connect/callback"
+          client_options:
+            identifier: "gitlab"
+            secret: "gitlab-client-secret"
+            redirect_uri: "https://gitlab-gitlab.apps.cluster-dgtnv.dgtnv.sandbox593.opentlc.com/users/auth/openid_connect/callback"
 
   users:
     count: 0
