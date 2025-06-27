@@ -1,14 +1,14 @@
 gitlab:
   image: quay.io/redhat-gpte/gitlab:17.4.1
 
-  host: "gitlab-gitlab.apps.cluster-dgtnv.dgtnv.sandbox593.opentlc.com"
+  host: "gitlab-gitlab.apps.cluster-htghs.htghs.sandbox440.opentlc.com"
   https: "true"
 
   email:
-    address: "gitlab@apps.cluster-dgtnv.dgtnv.sandbox593.opentlc.com"
+    address: "gitlab@apps.cluster-htghs.htghs.sandbox440.opentlc.com"
     displayName: "GitLab Admin"
-    replyTo: "noreply@apps.cluster-dgtnv.dgtnv.sandbox593.opentlc.com"
-  rootEmail: "root@apps.cluster-dgtnv.dgtnv.sandbox593.opentlc.com"
+    replyTo: "noreply@apps.cluster-htghs.htghs.sandbox440.opentlc.com"
+  rootEmail: "root@apps.cluster-htghs.htghs.sandbox440.opentlc.com"
 
   rootPassword: ""
 
@@ -42,14 +42,14 @@ gitlab:
           name: "openid_connect"
           scope: ["openid", "profile", "email", "groups"]
           response_type: "code"
-          issuer: "https://keycloak.apps.cluster-dgtnv.dgtnv.sandbox593.opentlc.com/realms/backstage"
+          issuer: "https://keycloak.apps.cluster-htghs.htghs.sandbox440.opentlc.com/realms/backstage"
           discovery: true
           client_auth_method: "query"
           uid_field: "preferred_username"
           client_options:
             identifier: "gitlab"
             secret: "gitlab-client-secret"
-            redirect_uri: "https://gitlab-gitlab.apps.cluster-dgtnv.dgtnv.sandbox593.opentlc.com/users/auth/openid_connect/callback"
+            redirect_uri: "https://gitlab-gitlab.apps.cluster-htghs.htghs.sandbox440.opentlc.com/users/auth/openid_connect/callback"
 
   users:
     count: 0
@@ -63,7 +63,7 @@ postgresql:
   dbName: gitlab_production
 
 cluster:
-  subdomain: "apps.cluster-dgtnv.dgtnv.sandbox593.opentlc.com"
+  subdomain: "apps.cluster-htghs.htghs.sandbox440.opentlc.com"
 
 orchestrator:
   namespace: orchestrator
