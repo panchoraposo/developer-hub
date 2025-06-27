@@ -10,7 +10,7 @@ gitlab:
     replyTo: "noreply@apps.cluster-htghs.htghs.sandbox440.opentlc.com"
   rootEmail: "root@apps.cluster-htghs.htghs.sandbox440.opentlc.com"
 
-  rootPassword: ""
+  rootPassword: "backstage"
 
   keyBase:
     db: "0123456789"
@@ -28,28 +28,6 @@ gitlab:
     port: "587"
     user: "gitlab"
     password: "gitlab"
-
-  omniauth:
-    enabled: true
-    autoSignInWithProvider: "openid_connect"
-    allowSingleSignOn: ["openid_connect"]
-    blockAutoCreatedUsers: false
-    externalProviders: ["openid_connect"]
-    providers:
-      - name: "openid_connect"
-        label: "Keycloak"
-        args:
-          name: "openid_connect"
-          scope: ["openid", "profile", "email", "groups"]
-          response_type: "code"
-          issuer: "https://keycloak.apps.cluster-htghs.htghs.sandbox440.opentlc.com/realms/backstage"
-          discovery: true
-          client_auth_method: "query"
-          uid_field: "preferred_username"
-          client_options:
-            identifier: "gitlab"
-            secret: "gitlab-client-secret"
-            redirect_uri: "https://gitlab-gitlab.apps.cluster-htghs.htghs.sandbox440.opentlc.com/users/auth/openid_connect/callback"
 
   users:
     count: 0
