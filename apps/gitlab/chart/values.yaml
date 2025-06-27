@@ -34,6 +34,11 @@ gitlab:
 
   groups:
     - name: rhdh
+  
+  omniauth:
+    enabled: true
+    providers:
+      - secret: gitlab-oidc-config
 
 postgresql:
   dbUser: gitlab
