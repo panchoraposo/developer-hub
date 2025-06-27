@@ -27,7 +27,7 @@ data:
   SMTP_DOMAIN: {{ $.Values.gitlab.smtp.domain }}
   SMTP_ENABLED: "{{ $.Values.gitlab.smtp.enabled }}"
   SMTP_HOST: {{ $.Values.gitlab.smtp.host }}
-  SMTP_PORT: "{{ $.Values.gitlab.smtp.port }}"Add commentMore actions
+  SMTP_PORT: "{{ $.Values.gitlab.smtp.port }}"
   SMTP_STARTTLS: "true"
   SMTP_USER: {{ $.Values.gitlab.smtp.user }}
   TZ: Europe/Berlin
